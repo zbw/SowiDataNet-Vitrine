@@ -1,0 +1,85 @@
+@(item: model.Item, community: model.Community)
+
+@main(community.name, community.getHandlePart) {
+
+    <div class="col-sm-8">
+        <div class="row">
+            <div class="col-sm-12">
+            <h1>@item.name</h1>
+                <div class="uri"><strong>Handle:</strong><a href="http://hdl.handle.net/@item.handle">http://hdl.handle.net/@item.handle</a></div>
+                <div class="itemdate"><strong>Datum:</strong>@item.getIssueDate()</div>
+                @if(item.getDescription() != null) {
+                <div class="simple-item-view-description">
+                    <h3 class="bold">Beschreibung:</h3>
+                    <div>@item.getDescription()</div>
+                </div>
+                }
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12">
+            @if(item.bitstreams.size > 0) {
+                <h3>Bitstreams</h3>
+                @for(bitstream <- item.bitstreams) {
+                    <div class="row resultrow">
+                        <div class="col-sm-2">
+                            <a href="@(Application.baseProt)://@(Application.baseHost):@(Application.basePort)@(Application.basePath)@(bitstream.retrieveLink)">
+                            <img style="height: 80px;" src="@routes.Assets.versioned("images/mime.png")" alt="Icon">
+                                </a>
+                        </div>
+                        <div class="col-sm-10">
+                            <div><strong>Name: </strong><a href="@(Application.baseProt)://@(Application.baseHost):@(Application.basePort)@(Application.basePath)@(bitstream.retrieveLink)">@bitstream.name</a></div>
+                            <div><strong>Bundle: </strong>@bitstream.bundleName</div>
+                            <div><strong>Größe: </strong>@bitstream.sizeBytes</div>
+                            <div><strong>Format: </strong>@bitstream.format</div>
+                            <div><strong>Beschreibung: </strong>@bitstream.description</div>
+                        </div>
+                    </div>
+                }
+            }
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">
+                            <a class="btn btn-primary" role="button" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                            Metadata
+                            </a>
+                        </h3>
+                    </div>
+                    <div class="collapse" id="collapseExample">
+                    <div class="panel-body">
+                @for(metadataField <- item.metadata) {
+                    <div class="row resultrow">
+                        <div class="col-sm-4">@metadataField.key</div>
+                        <div class="col-sm-8">@metadataField.value</div>
+                    </div>
+                }
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Suche</h3>
+            </div>
+            <div class="panel-body">
+            @helper.form(action = routes.SearchApplication.search()) {
+                <input type="hidden" name="handle" value="@community.getHandlePart()">
+                <div class="form-group">
+                    <label for="query">Volltextsuche</label>
+                    <input type="text" name="query" class="form-control" id="inputquery" value="">
+                </div>
+                <button type="submit" class="btn btn-default">Suchen</button>
+            }
+            </div>
+        </div>
+    </div>
+
+}

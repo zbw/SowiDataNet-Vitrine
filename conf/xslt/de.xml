@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+    <translations>
+        <phrase token="xmlui.ArtifactBrowser.AdvancedSearch.type_author">Author</phrase>
+        <phrase token="xmlui.ArtifactBrowser.AdvancedSearch.type_dateIssued">Datum</phrase>
+        <phrase token="xmlui.ArtifactBrowser.AdvancedSearch.type_subject">Subjekt</phrase>
+        <phrase token="xmlui.ArtifactBrowser.AdvancedSearch.type_language">Sprache</phrase>
+
+    </translations>
