@@ -26,12 +26,13 @@ import java.util.Map;
 
 public class SearchApplication extends Controller {
 
-    public static String baseRestUrl = "http://dspace.vm:8080/rest";
+
     public static String baseProt = ConfigFactory.load().getString("baseprot");
     public static String baseHost = ConfigFactory.load().getString("basehost");
     public static String basePort = ConfigFactory.load().getString("baseport");
     public static String basePath = ConfigFactory.load().getString("basepath");
     public static String baseHandle = ConfigFactory.load().getString("basehandle");
+    public static String baseRestUrl = baseProt+"://"+baseHost+":"+basePort+"/rest";
 
     @Inject WSClient ws;
 
@@ -144,7 +145,7 @@ public class SearchApplication extends Controller {
 
 
         if (conn.getResponseCode() != 200) {
-            throw new MalformedURLException("Non-200 response: " + conn.getResponseMessage());
+            throw new MalformedURLException("Non-200 response: " + conn.getResponseMessage() + " for: " + conn.getURL());
         }
 
         return conn;
