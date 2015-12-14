@@ -3,10 +3,9 @@ target
 /.idea
 /.idea_modules
 /.classpath
-/.project
 /.settings
 /RUNNING_PID
-
 .sbtserver/*
-project/*
 projectFilesBackup/*
+project/project/*
+project/target.bck/*
