@@ -29,7 +29,7 @@ public class ContextAction extends play.mvc.Action.Simple {
         } else {
             institution.id = "noname";
             institution.handle = "27788";
-            institution.name = "No Institution";
+            institution.name = "Sowidata Vitrine";
             institution.cssfile = "";
         }
         ctx.args.put("institution", institution);
