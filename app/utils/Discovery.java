@@ -1,6 +1,7 @@
 package utils;
 
 import com.typesafe.config.ConfigFactory;
+import model.Institution;
 import play.Play;
 import play.libs.F;
 import play.libs.ws.WSClient;
@@ -64,8 +65,8 @@ public class Discovery extends Controller {
         return xml;
     }
 
-    public static F.Promise<String> facetBox(F.Promise<String> xmlPromise, String handle) {
-
+    public static F.Promise<String> facetBox(F.Promise<String> xmlPromise, Institution inst) {
+        String handle = inst.handle;
         F.Promise<String> facetbox = xmlPromise.map(xml -> {
             Source xmlsource = new StreamSource(new StringReader(xml));
             String body = "";
@@ -74,7 +75,8 @@ public class Discovery extends Controller {
             Transformer trans = transFact.newTransformer(xslt);
             trans.setParameter("lang", "de");
             trans.setParameter("path", "./conf/xslt/") ;
-            trans.setParameter("handle", handle) ;
+            trans.setParameter("institut.id", inst.id) ;
+            trans.setParameter("handle", inst.handle) ;
             trans.setParameter("basehandle", baseHandle) ;
             StringWriter writer = new StringWriter();
             StreamResult s_result = new StreamResult(writer);
@@ -86,7 +88,7 @@ public class Discovery extends Controller {
     }
 
 
-    public static F.Promise<String> resultList(F.Promise<String> xmlPromise, String handle) {
+    public static F.Promise<String> resultList(F.Promise<String> xmlPromise, Institution inst) {
         F.Promise<String> resultListPromise = xmlPromise.map(xml -> {
             Source xmlsource = new StreamSource(new StringReader(xml));
             String resultListBody = "";
@@ -95,7 +97,8 @@ public class Discovery extends Controller {
             Transformer trans = transFact.newTransformer(xslt);
             trans.setParameter("lang", "de");
             trans.setParameter("path", "./conf/xslt/") ;
-            trans.setParameter("handle", handle) ;
+            trans.setParameter("handle", inst.handle) ;
+            trans.setParameter("institut.id", inst.id) ;
             trans.setParameter("basehandle", baseHandle) ;
             StringWriter writer = new StringWriter();
             StreamResult s_result = new StreamResult(writer);

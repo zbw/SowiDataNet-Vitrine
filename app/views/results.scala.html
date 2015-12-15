@@ -1,7 +1,8 @@
-@(facets: String, results: String, handle: String, query: String, community: model.Community)
+@import model.Institution
+@(facets: String, results: String, institution: Institution, query: String)
 
 
-@main(community.name, community.getHandlePart) {
+@main(institution) {
 
     <div class="col-sm-8">
         <div class="panel panel-default">
@@ -9,8 +10,8 @@
                 <h3 class="panel-title">Suche</h3>
             </div>
             <div class="panel-body">
-                @helper.form(action = routes.SearchApplication.search()) {
-                    <input type="hidden" name="handle" value="@handle">
+                @helper.form(action = routes.SearchApplication.search(institution.id)) {
+
                     <div class="form-group">
                         <label for="query">Volltextsuche</label>
                         <input type="text" name="query" class="form-control" id="inputquery" value="@query">

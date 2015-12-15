@@ -5,6 +5,7 @@
     <xsl:output method="html"/>
     <xsl:param name="lang" select="'de'"/>
     <xsl:param name="path" select="'./'"/>
+    <xsl:param name="institut.id"/>
     <xsl:param name="handle"/>
     <xsl:param name="basehandle"/>
     <xsl:variable name="translationpath"><xsl:value-of select="$path"/></xsl:variable>
@@ -46,7 +47,7 @@
             <xsl:if test="not(contains(xref/.,'view-more'))">
             <div>
                 <a>
-                <xsl:attribute name="href">/discover/<xsl:value-of select="$basehandle"/>/<xsl:value-of select="$handle"/>/<xsl:value-of select="substring-after(xref/@target,'discover')"/></xsl:attribute>
+                <xsl:attribute name="href">/<xsl:value-of select="$institut.id"/>/discover/<xsl:value-of select="$basehandle"/>/<xsl:value-of select="$handle"/>/<xsl:value-of select="substring-after(xref/@target,'discover')"/></xsl:attribute>
                 <xsl:value-of select="xref/."/>
                 </a>
             </div>

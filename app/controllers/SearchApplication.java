@@ -1,9 +1,11 @@
 package controllers;
 
 
+import actions.ContextAction;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.typesafe.config.ConfigFactory;
 import model.Community;
+import model.Institution;
 import model.Item;
 import model.RestResponse;
 import play.Logger;
@@ -12,6 +14,7 @@ import play.libs.Json;
 import play.libs.ws.WSClient;
 import play.mvc.Controller;
 import play.mvc.Result;
+import play.mvc.With;
 import utils.Discovery;
 
 import javax.inject.Inject;
@@ -40,25 +43,29 @@ public class SearchApplication extends Controller {
      * handle als parameter immer mitschleifen so kann beliebiges dspace rep eingebunden werden
      * @return
      */
-
-    public F.Promise<Result> discover(String basehandle, String handle) {
+    @With(ContextAction.class)
+    public F.Promise<Result> discover(String institute, String basehandle, String handle) {
+        Institution inst = (Institution) ctx().args.get("institution");
+        handle = inst.handle;
         String params = queryString();
         String query = request().getQueryString("query");
-        return search(handle, query, params);
+        return search(inst, query, params);
     }
-    public F.Promise<Result> search() {
+
+    @With(ContextAction.class)
+    public F.Promise<Result> search(String institution) {
+        Institution inst = (Institution) ctx().args.get("institution");
         String query = request().getQueryString("query");
-        String handle = request().getQueryString("handle");
-        return search(handle, query, null);
+        return search(inst, query, null);
     }
-    public F.Promise<Result> search(final String handle,final String query,final String params) {
-        F.Promise<String> xmlPromise = Discovery.getXML(ws, handle, query, params);
-        F.Promise<String> facetsPromise = Discovery.facetBox(xmlPromise, handle);
-        F.Promise<String> resultsPromise = Discovery.resultList(xmlPromise, handle);
+    public F.Promise<Result> search(final Institution inst,final String query,final String params) {
+        F.Promise<String> xmlPromise = Discovery.getXML(ws, inst.handle, query, params);
+        F.Promise<String> facetsPromise = Discovery.facetBox(xmlPromise, inst);
+        F.Promise<String> resultsPromise = Discovery.resultList(xmlPromise, inst);
 
         F.Promise<Result> result =
                 F.Promise.sequence(facetsPromise, resultsPromise).map(components -> {
-                    return ok(views.html.results.render(components.get(0), components.get(1), handle, query,getCommunity(handle)));
+                    return ok(views.html.results.render(components.get(0), components.get(1), inst, query));
                 });
         return result;
 
@@ -86,7 +93,9 @@ public class SearchApplication extends Controller {
         return result;
     }
 
-    public Result showItem(String community, String handle) {
+    @With(ContextAction.class)
+    public Result showItem(String institution, String community, String handle) {
+        Institution inst = (Institution) ctx().args.get("institution");
         StringBuilder contentString = new StringBuilder();
         HttpURLConnection conn = null;
         BufferedReader reader = null;
@@ -105,7 +114,7 @@ public class SearchApplication extends Controller {
                 item = Item.parseItemFromJSON(node);
             }
 
-            return ok(views.html.item.detail.render(item, getCommunity(community)));
+            return ok(views.html.item.detail.render(item, inst));
         } catch (MalformedURLException e) {
             return badRequest(e.getMessage());
         } catch (IOException e) {

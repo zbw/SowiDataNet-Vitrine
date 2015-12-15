@@ -3,11 +3,11 @@
 # ~~~~
 
 # Home page
-
-GET        /                              controllers.Application.index(handle ?= "27788")
-GET        /search                               controllers.SearchApplication.search()
-GET        /discover/:basehandle/:handle/        controllers.SearchApplication.discover(basehandle: String, handle: String)
-GET        /item/:community/:handle              controllers.SearchApplication.showItem(community:String, handle: String)
+GET        /                                     controllers.Application.start()
+GET        /:institute                              controllers.Application.index(institute: String)
+GET        /:institute/search                               controllers.SearchApplication.search(institute: String)
+GET        /:institute/discover/:basehandle/:handle/        controllers.SearchApplication.discover(institute: String, basehandle: String, handle: String)
+GET        /:institute/item/:community/:handle              controllers.SearchApplication.showItem(institute: String, community:String, handle: String)
 #GET         /communities                 controllers.Communities.index()
 #GET         /communities/:id             controllers.Communities.show(id: Long)
 

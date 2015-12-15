@@ -1,0 +1,10 @@
+.container {
+    width:850px;
+}
+.resultrow {
+    margin-bottom: 20px;
+}
+
+.panel-default>.panel-heading {
+    background-color: #c1e2b3;
+}

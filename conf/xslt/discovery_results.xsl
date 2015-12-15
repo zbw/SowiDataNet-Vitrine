@@ -6,6 +6,7 @@
     <xsl:param name="lang" select="'de'"/>
     <xsl:param name="path" select="'./'"/>
     <xsl:param name="handle"/>
+    <xsl:param name="institut.id"/>
     <xsl:param name="basehandle"/>
     <xsl:variable name="translationpath"><xsl:value-of select="$path"/></xsl:variable>
     <xsl:variable name="language"><xsl:value-of select="$lang"/></xsl:variable>
@@ -38,7 +39,7 @@
         <xsl:for-each select="list/list[@n='item-result-list']/list">
             <li class="list-group-item">
                 <xsl:variable name="id" select="substring-after(list[contains(@n,'dc.identifier.uri')]/item,concat($basehandle,'/'))"/>
-                <div class="listitemheader"><a href="/item/{$handle}/{$id}"><xsl:value-of select="list[contains(@n,'dc.title')]/item"/></a> </div>
+                <div class="listitemheader"><a href="/{$institut.id}/item/{$handle}/{$id}"><xsl:value-of select="list[contains(@n,'dc.title')]/item"/></a> </div>
                 <div class="listitemcontributor">
                     <xsl:for-each select="list[contains(@n,'dc.contributor')]/item">
                         <xsl:value-of select="."/>;

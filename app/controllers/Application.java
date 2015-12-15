@@ -1,32 +1,19 @@
 package controllers;
 
 
+import actions.ContextAction;
 import com.typesafe.config.ConfigFactory;
 import model.Community;
+import model.Institution;
 import model.RestResponse;
-import play.Logger;
-import play.Play;
 import play.libs.F.Promise;
 import play.libs.ws.WSClient;
-import play.libs.ws.WSResponse;
 import play.mvc.Controller;
 import play.mvc.Result;
+import play.mvc.With;
 import utils.Discovery;
 
 import javax.inject.Inject;
-import javax.net.ssl.HttpsURLConnection;
-import javax.xml.transform.Source;
-import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerException;
-import javax.xml.transform.TransformerFactory;
-import javax.xml.transform.stream.StreamResult;
-import javax.xml.transform.stream.StreamSource;
-import java.io.IOException;
-import java.io.StringReader;
-import java.io.StringWriter;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
 
 public class Application extends Controller {
 
@@ -43,21 +30,22 @@ public class Application extends Controller {
      * handle als parameter immer mitschleifen so kann beliebiges dspace rep eingebunden werden
      * @return
      */
-
-    public Promise<Result> index() {
-        return index("27788");
+    @With(ContextAction.class)
+    public Result start() {
+        Institution inst = (Institution) ctx().args.get("institution");
+        return ok(views.html.start.render(inst));
     }
 
-    public Promise<Result> index(String handle) {
-
-
+    @With(ContextAction.class)
+    public Promise<Result> index(String institute) {
+        Institution inst = (Institution) ctx().args.get("institution");
+        String handle = inst.handle;
         Promise<String> xmlPromise = Discovery.getXML(ws, handle, null, null);
-        Promise<String> facetsPromise = Discovery.facetBox(xmlPromise, handle);
-        Promise<String> facetsPromise2 = Discovery.facetBox(xmlPromise, handle);
+        Promise<String> facetsPromise = Discovery.facetBox(xmlPromise, inst);
+        //Promise<String> facetsPromise2 = Discovery.facetBox(xmlPromise, handle);
         Promise<Result> result =
-                Promise.sequence(facetsPromise, facetsPromise2).map(components -> {
-                   System.out.println("all fetched");
-                    return ok(views.html.institution.render(components.get(0), components.get(1), handle,getCommunity(handle)));
+                Promise.sequence(facetsPromise).map(components -> {
+                  return ok(views.html.institution.render(components.get(0),inst));
                 });
         return result;
     }
