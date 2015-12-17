@@ -1,15 +1,22 @@
 body {
-    background:#eaeaea;
+    background:#ffffff;
     font-family: arial, helvetica, sans-serif;
     font-size:12px;
 }
+a {
+    color:#000000;
+}
+a:hover {
+    color: #337ab7;
+}
 .container {
-    width:940px;
+    width:768px;
     background: white;
 }
-.page-header h1 {
-    background-image: url(http://www.diw.de/sixcms/media.php/37/diw_logo_farbe_mini.jpg);
+.page-header {
+    background-image: url(https://www.wzb.eu/sites/all/themes/wzb_web/logo.png);
     background-repeat: no-repeat;
+    padding-bottom: 100px;
 }
 .page-header h1 a {
     margin-left:20%;
@@ -26,5 +33,9 @@ body {
 }
 
 .panel-default>.panel-heading {
-    background-color: #c0deda;
+    background-color: #e3e3e3;
+}
+
+.panel-heading h3 {
+    font-size:1.5em;
 }
