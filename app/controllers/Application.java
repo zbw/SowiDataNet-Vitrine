@@ -40,12 +40,13 @@ public class Application extends Controller {
     public Promise<Result> index(String institute) {
         Institution inst = (Institution) ctx().args.get("institution");
         String handle = inst.handle;
+
         Promise<String> xmlPromise = Discovery.getXML(ws, handle, null, null);
         Promise<String> facetsPromise = Discovery.facetBox(xmlPromise, inst);
         //Promise<String> facetsPromise2 = Discovery.facetBox(xmlPromise, handle);
         Promise<Result> result =
                 Promise.sequence(facetsPromise).map(components -> {
-                  return ok(views.html.institution.render(components.get(0),inst));
+                  return ok(views.html.institution.render(components.get(0),inst, getCommunity(inst.handle)));
                 });
         return result;
     }

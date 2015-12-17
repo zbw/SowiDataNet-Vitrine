@@ -1,8 +1,9 @@
 @import model.Institution
-@(facets: String, results: String, institution: Institution, query: String)
+@import model.Community
+@(facets: String, results: String, institution: Institution, query: String, community: Community)
 
 
-@main(institution) {
+@main(institution, community) {
 
     <div class="col-sm-8">
         <div class="panel panel-default">

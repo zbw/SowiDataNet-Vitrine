@@ -65,7 +65,7 @@ public class SearchApplication extends Controller {
 
         F.Promise<Result> result =
                 F.Promise.sequence(facetsPromise, resultsPromise).map(components -> {
-                    return ok(views.html.results.render(components.get(0), components.get(1), inst, query));
+                    return ok(views.html.results.render(components.get(0), components.get(1), inst, query, getCommunity(inst.handle)));
                 });
         return result;
 
@@ -114,7 +114,7 @@ public class SearchApplication extends Controller {
                 item = Item.parseItemFromJSON(node);
             }
 
-            return ok(views.html.item.detail.render(item, inst));
+            return ok(views.html.item.detail.render(item, inst,getCommunity(inst.handle)));
         } catch (MalformedURLException e) {
             return badRequest(e.getMessage());
         } catch (IOException e) {
