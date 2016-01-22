@@ -2,11 +2,12 @@ body {
     background:#005d95;
     font-size:12px;
 }
-
-.container {
-    width:840px;
-    background: #005d95;
+@media (min-width: 1200px) {
+    .container {
+        width: 840px;
+    }
 }
+
 .content {
     background:#ffffff;
 }

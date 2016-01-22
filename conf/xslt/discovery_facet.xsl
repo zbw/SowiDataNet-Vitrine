@@ -32,17 +32,24 @@
     <xsl:template match="/document/options/list[@id='aspect.discovery.Navigation.list.discovery']">
 
         <xsl:for-each select="list">
+            <xsl:variable name="titletag" select="normalize-space(head/.)"/>
+            <xsl:variable name="titleid" select="translate($titletag,'.','_')"/>
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h3 class="panel-title">
+                        <a role="button" data-toggle="collapse" aria-expanded="false">
+                            <xsl:attribute name="href">#<xsl:value-of select="$titleid" /> </xsl:attribute>
+                            <xsl:attribute name="aria-controls"><xsl:value-of select="$titletag" /> </xsl:attribute>
 
-                        <xsl:variable name="titletag" select="normalize-space(head/.)"/>
+
                         <xsl:call-template name="translate">
                             <xsl:with-param name="token"><xsl:value-of select="$titletag" /></xsl:with-param>
                         </xsl:call-template>
+                        </a>
                     </h3>
                 </div>
-            <div class="panel-body">
+            <div class="panel-body collapse">
+                <xsl:attribute name="id"><xsl:value-of select="$titleid" /> </xsl:attribute>
         <xsl:for-each select="item">
             <xsl:if test="not(contains(xref/.,'view-more'))">
             <div>

@@ -3,8 +3,13 @@ body {
     font-family: arial, helvetica, sans-serif;
     font-size:12px;
 }
+@media (min-width: 1200px) {
+    .container {
+        width: 940px;
+    }
+}
 .container {
-    width:940px;
+
     background: white;
 }
 .page-header h1 {

@@ -1,5 +1,7 @@
-.container {
-    width:650px;
+@media (min-width: 1200px) {
+    .container {
+        width: 650px;
+    }
 }
 .resultrow {
     margin-bottom: 20px;

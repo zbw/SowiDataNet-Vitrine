@@ -9,8 +9,14 @@ a {
 a:hover {
     color: #337ab7;
 }
+
+@media (min-width: 1200px) {
+    .container {
+        width: 768px;
+    }
+}
 .container {
-    width:768px;
+
     background: white;
 }
 .page-header {
