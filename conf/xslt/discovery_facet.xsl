@@ -3,7 +3,7 @@
                 xmlns:dyn="http://exslt.org/dynamic"
                 extension-element-prefixes="dyn">
     <xsl:output method="html"/>
-    <xsl:param name="lang" select="'de'"/>
+    <xsl:param name="lang" select="'en'"/>
     <xsl:param name="path" select="'./'"/>
     <xsl:param name="institut.id"/>
     <xsl:param name="handle"/>

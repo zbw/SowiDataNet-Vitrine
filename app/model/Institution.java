@@ -8,4 +8,9 @@ public class Institution {
     public String id;
     public String name;
     public String cssfile;
+    public String prot;
+    public String host;
+    public String port;
+    public String basepath;
+    public String basehandle;
 }

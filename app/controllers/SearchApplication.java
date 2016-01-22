@@ -3,7 +3,6 @@ package controllers;
 
 import actions.ContextAction;
 import com.fasterxml.jackson.databind.JsonNode;
-import com.typesafe.config.ConfigFactory;
 import model.Community;
 import model.Institution;
 import model.Item;
@@ -30,12 +29,7 @@ import java.util.Map;
 public class SearchApplication extends Controller {
 
 
-    public static String baseProt = ConfigFactory.load().getString("baseprot");
-    public static String baseHost = ConfigFactory.load().getString("basehost");
-    public static String basePort = ConfigFactory.load().getString("baseport");
-    public static String basePath = ConfigFactory.load().getString("basepath");
-    public static String baseHandle = ConfigFactory.load().getString("basehandle");
-    public static String baseRestUrl = baseProt+"://"+baseHost+":"+basePort+"/rest";
+
 
     @Inject WSClient ws;
 
@@ -59,20 +53,20 @@ public class SearchApplication extends Controller {
         return search(inst, query, null);
     }
     public F.Promise<Result> search(final Institution inst,final String query,final String params) {
-        F.Promise<String> xmlPromise = Discovery.getXML(ws, inst.handle, query, params);
+        F.Promise<String> xmlPromise = Discovery.getXML(ws, inst, query, params);
         F.Promise<String> facetsPromise = Discovery.facetBox(xmlPromise, inst);
         F.Promise<String> resultsPromise = Discovery.resultList(xmlPromise, inst);
 
         F.Promise<Result> result =
                 F.Promise.sequence(facetsPromise, resultsPromise).map(components -> {
-                    return ok(views.html.results.render(components.get(0), components.get(1), inst, query, getCommunity(inst.handle)));
+                    return ok(views.html.results.render(components.get(0), components.get(1), inst, query, getCommunity(inst)));
                 });
         return result;
 
     }
 
-    public static Community getCommunity(String handle) {
-        RestResponse response = Community.findByHandle(baseHandle+"/"+handle);
+    public static Community getCommunity(Institution inst) {
+        RestResponse response = Community.findInstitutionByHandle(inst);
         if(response.modelObject instanceof Community) {
             return (Community) response.modelObject;
         } else {
@@ -100,7 +94,8 @@ public class SearchApplication extends Controller {
         HttpURLConnection conn = null;
         BufferedReader reader = null;
         try {
-            conn = connectToURL ("handle/" + baseHandle +"/" + handle + "?expand=metadata,bitstreams");
+           String baseRestUrl = inst.prot+"://"+inst.host+":"+inst.port+"/rest/handle/" + inst.basehandle +"/" + handle + "?expand=metadata,bitstreams";
+            conn = connectToURL (baseRestUrl);
             reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
             String output;
             while ((output = reader.readLine()) != null) {
@@ -114,7 +109,7 @@ public class SearchApplication extends Controller {
                 item = Item.parseItemFromJSON(node);
             }
 
-            return ok(views.html.item.detail.render(item, inst,getCommunity(inst.handle)));
+            return ok(views.html.item.detail.render(item, inst,getCommunity(inst)));
         } catch (MalformedURLException e) {
             return badRequest(e.getMessage());
         } catch (IOException e) {
@@ -140,7 +135,7 @@ public class SearchApplication extends Controller {
         // Now you can access an https URL without having the certificate in the truststore
 
         HttpURLConnection conn;
-        URL url = new URL(baseRestUrl + "/" + endpoint);
+        URL url = new URL(endpoint);
 
         if(url.getProtocol().contains("https")) {
             conn = (HttpsURLConnection) url.openConnection();

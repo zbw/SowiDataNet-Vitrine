@@ -2,16 +2,7 @@ package model;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.node.ObjectNode;
-import controllers.Application;
 import controllers.SearchApplication;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpPut;
-import org.apache.http.conn.ssl.AllowAllHostnameVerifier;
-import org.apache.http.conn.ssl.SSLSocketFactory;
-import org.apache.http.entity.StringEntity;
-import org.apache.http.impl.client.DefaultHttpClient;
 import play.Logger;
 import play.libs.Json;
 
@@ -103,14 +94,15 @@ public class Community {
         return restResponse;
     }
 
-    public static RestResponse findByHandle(String handle) {
+    public static RestResponse findInstitutionByHandle(Institution inst) {
+
         StringBuilder contentString = new StringBuilder();
         HttpURLConnection conn = null;
         BufferedReader reader = null;
         RestResponse restResponse = new RestResponse();
 
         try {
-            conn = SearchApplication.connectToURL("handle/" + handle + "?expand=logo");
+            conn = SearchApplication.connectToURL(inst.prot + "://" + inst.host + ":"+ inst.port+"/rest/handle/" + inst.basehandle+"/"+inst.handle + "?expand=logo");
             reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
 
             String output;
@@ -145,7 +137,7 @@ public class Community {
         }
         return restResponse;
     }
-
+    /**
     public RestResponse update(String token) throws IOException {
         //TODO insecure ssl hack
         HttpClient httpClient = new DefaultHttpClient();
@@ -174,7 +166,7 @@ public class Community {
         restResponse.endpoint = request.getURI().toString();
         return restResponse;
     }
-
+    **/
     public static Community parseCommunityFromJSON(JsonNode communityJSON) {
         //Other elements include
         // administrators, canEdit, collections, copyrightText, countItems, handle, id, introductoryText

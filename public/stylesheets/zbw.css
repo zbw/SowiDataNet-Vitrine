@@ -7,6 +7,9 @@ body {
     width:840px;
     background: #005d95;
 }
+.content {
+    background:#ffffff;
+}
 .page-header {
     background:#ffffff;
     background-image: url(http://www.zbw.eu/fileadmin/templates/img/logo.png);

@@ -1,6 +1,5 @@
 package utils;
 
-import com.typesafe.config.ConfigFactory;
 import model.Institution;
 import play.Play;
 import play.libs.F;
@@ -27,19 +26,19 @@ public class Discovery extends Controller {
 
 
 
-    public static String baseRestUrl = "http://dspace.vm:8080/rest";
-    public static String baseProt = ConfigFactory.load().getString("baseprot");
-    public static String baseHost = ConfigFactory.load().getString("basehost");
-    public static String basePort = ConfigFactory.load().getString("baseport");
-    public static String basePath = ConfigFactory.load().getString("basepath");
-    public static String baseHandle = ConfigFactory.load().getString("basehandle");
+    //public static String baseRestUrl = "http://dspace.vm:8080/rest";
+    //public static String baseProt = ConfigFactory.load().getString("baseprot");
+    //public static String baseHost = ConfigFactory.load().getString("basehost");
+    //public static String basePort = ConfigFactory.load().getString("baseport");
+    //public static String basePath = ConfigFactory.load().getString("basepath");
+    //public static String baseHandle = ConfigFactory.load().getString("basehandle");
 
     public Discovery() {}
 
-    public static F.Promise<String> getXML(WSClient ws,String handle, String query, String params) {
+    public static F.Promise<String> getXML(WSClient ws,Institution inst, String query, String params) {
         String port = "";
-        if (basePort!=null && !basePort.equals("")) {
-            port = ":" + basePort;
+        if (inst.port!=null && !inst.port.equals("")) {
+            port = ":" + inst.port;
         }
         String querypar = "";
         if (params != null) {
@@ -50,7 +49,7 @@ public class Discovery extends Controller {
         }
 
         querypar += "XML";
-        String url = baseProt+"://"+baseHost+port+"/"+basePath+"/handle/" + baseHandle +"/"+handle+"/discover";
+        String url = inst.prot+"://"+inst.host+port+"/"+inst.basepath+"/handle/" + inst.basehandle +"/"+inst.handle+"/discover";
         F.Promise<WSResponse> wsPromise = ws.url(url).setQueryString(querypar).get();
         F.Promise<String> xml = wsPromise.map(response -> {
 
@@ -77,7 +76,7 @@ public class Discovery extends Controller {
             trans.setParameter("path", "./conf/xslt/") ;
             trans.setParameter("institut.id", inst.id) ;
             trans.setParameter("handle", inst.handle) ;
-            trans.setParameter("basehandle", baseHandle) ;
+            trans.setParameter("basehandle", inst.basehandle) ;
             StringWriter writer = new StringWriter();
             StreamResult s_result = new StreamResult(writer);
             trans.transform(xmlsource,s_result);
@@ -99,7 +98,7 @@ public class Discovery extends Controller {
             trans.setParameter("path", "./conf/xslt/") ;
             trans.setParameter("handle", inst.handle) ;
             trans.setParameter("institut.id", inst.id) ;
-            trans.setParameter("basehandle", baseHandle) ;
+            trans.setParameter("basehandle", inst.basehandle) ;
             StringWriter writer = new StringWriter();
             StreamResult s_result = new StreamResult(writer);
             trans.transform(xmlsource,s_result);

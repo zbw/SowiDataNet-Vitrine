@@ -1,2 +1,10 @@
 xmlui.ArtifactBrowser.AdvancedSearch.type_author = Autor
 xmlui.ArtifactBrowser.AdvancedSearch.type_dateIssued = Datum
+xmlui.ArtifactBrowser.AdvancedSearch.type_pubyear = Jahr der Veröffentlichung
+xmlui.ArtifactBrowser.AdvancedSearch.type_institution = Institution
+xmlui.ArtifactBrowser.AdvancedSearch.type_availability = Verfügbarkeit
+xmlui.ArtifactBrowser.AdvancedSearch.type_subjectOther = Fachgebiet
+xmlui.ArtifactBrowser.AdvancedSearch.type_classification = Kategorie
+xmlui.ArtifactBrowser.AdvancedSearch.type_spatial = Untersuchungsgebiet
+xmlui.ArtifactBrowser.AdvancedSearch.type_universe = Grundgesamtheit
+xmlui.ArtifactBrowser.AdvancedSearch.type_method = Erhebungsverfahren

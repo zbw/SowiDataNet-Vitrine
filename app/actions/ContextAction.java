@@ -26,6 +26,12 @@ public class ContextAction extends play.mvc.Action.Simple {
             institution.handle = ConfigFactory.load().getString(institute + ".handle");
             institution.name = ConfigFactory.load().getString(institute + ".name");
             institution.cssfile = ConfigFactory.load().getString(institute + ".css");
+
+            institution.prot = ConfigFactory.load().getString(institute + ".prot");
+            institution.host = ConfigFactory.load().getString(institute + ".host");
+            institution.port = ConfigFactory.load().getString(institute + ".port");
+            institution.basepath = ConfigFactory.load().getString(institute + ".basepath");
+            institution.basehandle = ConfigFactory.load().getString(institute + ".basehandle");
         } else {
             institution.id = "noname";
             institution.handle = "27788";

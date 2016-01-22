@@ -5,4 +5,13 @@
         <phrase token="xmlui.ArtifactBrowser.AdvancedSearch.type_subject">Subjekt</phrase>
         <phrase token="xmlui.ArtifactBrowser.AdvancedSearch.type_language">Sprache</phrase>
 
-    </translations>
+        <phrase token="xmlui.ArtifactBrowser.AdvancedSearch.type_pubyear">Jahr der Veröffentlichung</phrase>
+        <phrase token="xmlui.ArtifactBrowser.AdvancedSearch.type_institution">Institution</phrase>
+        <phrase token="xmlui.ArtifactBrowser.AdvancedSearch.type_availability">Verfügbarkeit</phrase>
+        <phrase token="xmlui.ArtifactBrowser.AdvancedSearch.type_subjectOther">Fachgebiet</phrase>
+        <phrase token="xmlui.ArtifactBrowser.AdvancedSearch.type_classification">Kategorie</phrase>
+        <phrase token="xmlui.ArtifactBrowser.AdvancedSearch.type_spatial">Untersuchungsgebiet</phrase>
+        <phrase token="xmlui.ArtifactBrowser.AdvancedSearch.type_universe">Grundgesamtheit</phrase>
+        <phrase token="xmlui.ArtifactBrowser.AdvancedSearch.type_method">Erhebungsverfahren</phrase>
+
+</translations>

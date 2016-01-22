@@ -1,29 +1,9 @@
 package model;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import controllers.Application;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.methods.HttpPut;
-import org.apache.http.conn.ssl.AllowAllHostnameVerifier;
-import org.apache.http.conn.ssl.SSLSocketFactory;
-import org.apache.http.impl.client.DefaultHttpClient;
-import play.libs.Json;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Logger;
-
-import static play.mvc.Results.badRequest;
-import static play.mvc.Results.internalServerError;
 
 /**
  * Created by IntelliJ IDEA.
@@ -50,6 +30,7 @@ public class Collection {
     public List<Item> items = new ArrayList<Item>();
     public List<Community> parentCommunities = new ArrayList<Community>();
 
+    /**
     public static RestResponse findByID(Long id, String token) throws IOException {
         RestResponse restResponse = new RestResponse();
         //TODO insecure ssl hack
@@ -83,7 +64,7 @@ public class Collection {
 
         return restResponse;
     }
-
+    **/
 
     public static Collection parseCollectionFromJSON(JsonNode collectionJSON) {
         /*communities list
