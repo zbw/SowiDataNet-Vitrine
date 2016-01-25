@@ -33,7 +33,29 @@
                 }
             </div>
         </div>
-
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">
+                            <a class="btn btn-primary" role="button" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                                Metadata
+                            </a>
+                        </h3>
+                    </div>
+                    <div class="collapse" id="collapseExample">
+                        <div class="panel-body">
+                        @for(metadataField <- item.metadata) {
+                            <div class="row resultrow">
+                                <div class="col-sm-4">@metadataField.key</div>
+                                <div class="col-sm-8">@metadataField.value</div>
+                            </div>
+                        }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="row">
             <div class="col-sm-12">
             @if(item.bitstreams.size > 0) {
@@ -57,29 +79,7 @@
             }
             </div>
         </div>
-        <div class="row">
-            <div class="col-sm-12">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">
-                            <a class="btn btn-primary" role="button" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-                            Metadata
-                            </a>
-                        </h3>
-                    </div>
-                    <div class="collapse" id="collapseExample">
-                    <div class="panel-body">
-                @for(metadataField <- item.metadata) {
-                    <div class="row resultrow">
-                        <div class="col-sm-4">@metadataField.key</div>
-                        <div class="col-sm-8">@metadataField.value</div>
-                    </div>
-                }
-                    </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+
     </div>
 
 
