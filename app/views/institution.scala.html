@@ -1,8 +1,9 @@
 @(facets: String, institution: model.Institution, community: model.Community)
 
 @main(institution, community) {
-    <div class="col-sm-4">@Html(facets)  </div>
-    <div class="col-sm-8">
+    <div class="sdn_body">
+    <div class="sdn_sidebar">@Html(facets)  </div>
+    <div class="sdn_content">
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h3 class="panel-title">Suche</h3>
@@ -18,6 +19,6 @@
             </div>
         </div>
     </div>
-
+    </div>
 
 }

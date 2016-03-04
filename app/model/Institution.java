@@ -7,7 +7,6 @@ public class Institution {
     public String handle;
     public String id;
     public String name;
-    public String cssfile;
     public String prot;
     public String host;
     public String port;
