@@ -102,6 +102,7 @@ public class Community {
         RestResponse restResponse = new RestResponse();
 
         try {
+
             conn = SearchApplication.connectToURL(inst.prot + "://" + inst.host + ":"+ inst.port+"/rest/handle/" + inst.basehandle+"/"+inst.handle + "?expand=logo");
             reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
 

@@ -8,3 +8,14 @@ xmlui.ArtifactBrowser.AdvancedSearch.type_classification = Kategorie
 xmlui.ArtifactBrowser.AdvancedSearch.type_spatial = Untersuchungsgebiet
 xmlui.ArtifactBrowser.AdvancedSearch.type_universe = Grundgesamtheit
 xmlui.ArtifactBrowser.AdvancedSearch.type_method = Erhebungsverfahren
+
+dbk_file_desc =   Beschreibung der Datei
+dc_language_iso_desc =  Sprache
+dbk_resourcetype_number_desc =  Typ der Forschungsdaten
+dbk_dataset_item_number_desc =  Art der Einheit
+dbk_dataset_item_series_desc = Anzahl der Einheiten
+dbk_version_number_desc =  Versionsdatum
+dbk_version_series_desc = Versionsnummer
+hid_cb_submit_dbk_software_add_desc__0 =  Software
+dbk_resourcetype_series_desc = Typ der Forschungsdaten
+dbk_dataset_variable_desc = Anzahl der Variablen

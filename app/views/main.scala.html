@@ -23,8 +23,9 @@
     </head>
     <body>
         <div class="container">
-            <div class="page-header">
-                <h1><a href="@routes.Application.index(institution.id)">@if(community!=null){@community.name} else {SDN Vitrine} </a> <span class="badge">Prototyp</span></h1>
+            <div class="sdn_header">
+                <div class="sdn_logo">&nbsp;</div>
+                <div class="sdn_title"><h1><a href="@routes.Application.index(institution.id)">@if(community!=null){@community.name} else {SDN Vitrine} </a> <span class="badge">Prototyp</span></h1> </div>
             </div>
         @content
         </div>

@@ -1,8 +1,11 @@
 @import model.Institution
+
 @(item: model.Item, institution: Institution, community: model.Community)
 
 @main(institution, community) {
-    <div class="col-sm-4">
+    <div class="sdn_body">
+        <div class="sdn_sidebar">
+
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h3 class="panel-title">Suche</h3>
@@ -19,9 +22,9 @@
             </div>
         </div>
     </div>
-    <div class="col-sm-8 content">
-        <div class="row">
-            <div class="col-sm-12">
+
+    <div class="sdn_content">
+
             <h1>@item.name</h1>
                 <div class="uri"><strong>Handle:</strong><a href="http://hdl.handle.net/@item.handle">http://hdl.handle.net/@item.handle</a></div>
                 <div class="itemdate"><strong>Datum:</strong>@item.getIssueDate()</div>
@@ -31,19 +34,17 @@
                     <div>@item.getDescription()</div>
                 </div>
                 }
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-12">
+
+
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h3 class="panel-title">
-                            <a class="btn btn-primary" role="button" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                            <a class="btn btn-primary" role="button" data-toggle="collapse" href="#collapseMeta" aria-expanded="false" aria-controls="collapseMeta">
                                 Metadata
                             </a>
                         </h3>
                     </div>
-                    <div class="collapse" id="collapseExample">
+                    <div class="collapse" id="collapseMeta">
                         <div class="panel-body">
                         @for(metadataField <- item.metadata) {
                             <div class="row resultrow">
@@ -54,10 +55,8 @@
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-12">
+
+
             @if(item.bitstreams.size > 0) {
                 <h3>Bitstreams</h3>
                 @for(bitstream <- item.bitstreams) {
@@ -72,14 +71,25 @@
                             <div><strong>Bundle: </strong>@bitstream.bundleName</div>
                             <div><strong>Größe: </strong>@bitstream.sizeBytes</div>
                             <div><strong>Format: </strong>@bitstream.format</div>
-                            <div><strong>Beschreibung: </strong>@bitstream.description</div>
+                            <div><strong>Checksum: </strong>@bitstream.checksum</div>
+                            <a class="label label-default" data-toggle="collapse" href="#collapseDescr@bitstream.checksum" aria-expanded="false" aria-controls="collapseDescr@bitstream.checksum">
+                                Beschreibung:   @bitstream.description
+                            </a>
+
+                                <div class="collapse" id="collapseDescr@bitstream.checksum">
+                                @for((label, value) <- bitstream.descriptions){
+                                          <div><label>@label:</label>&nbsp@value</div>
+                                  }
+                                    </div>
+
                         </div>
                     </div>
                 }
             }
-            </div>
-        </div>
 
+
+
+    </div>
     </div>
 
 
