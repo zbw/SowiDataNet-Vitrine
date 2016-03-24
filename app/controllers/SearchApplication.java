@@ -66,8 +66,10 @@ public class SearchApplication extends Controller {
     }
     public F.Promise<Result> search(final Institution inst,final String query,final String params, String handle) {
         F.Promise<String> xmlPromise = Discovery.getXML(ws, inst, query, params);
-        List<Filter> filters = getFiltered(params, inst, handle);
-        F.Promise<Result> result = F.Promise.sequence(
+        // for showing selected filters in the facet bar
+        //List<Filter> filters = getFiltered(params, inst, handle);
+        List<Filter> filters = new ArrayList<>();
+                F.Promise<Result> result = F.Promise.sequence(
                 Discovery.facetBox(xmlPromise, inst),
                 Discovery.resultList(xmlPromise, inst),
                 Discovery.availableFacets(xmlPromise, inst))
