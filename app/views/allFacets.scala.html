@@ -1,0 +1,63 @@
+@import model.Facet
+@import java.util
+@import model.Filter
+@(facetlist: ArrayList[Facet], operators:  List[String], filters: List[Filter] )
+
+<div>
+    @for(filter <- filters) {
+        @if(!filter.isEmpty()) {
+        <div id="filterrow_@filter.id">
+
+            <div class="form-group col-md-4">
+                <select id="filtertype_@filter.id" name="filtertype_@filter.id" class="form-control">
+                @for(f <- facetlist) {
+                    <option value="@f.typ" @if(f.typ == filter.typ) {selected}>@Messages(f.token)</option>
+                }
+                </select>
+            </div>
+            <div class="form-group col-md-3">
+                <select id="filter_relational_operator_@filter.id" name="filter_relational_operator_@filter.id" class="form-control">
+                @for(o <- operators) {
+                    <option value="@o" @if(o == filter.relationalOperator) {selected}>@Messages("filter.operator."+o)</option>
+                }
+                </select>
+            </div>
+            <div class="form-group col-md-4">
+
+                <input type="text" class="form-control" id="filter_@filter.id" name="filter_@filter.id" value="@filter.filter">
+            </div>
+            <div class="col-md-1">
+                <span id="addbutton_@filter.id" class="glyphicon glyphicon-plus addfilter" aria-hidden="true"></span>
+                <span id="removebutton_@filter.id" class="glyphicon glyphicon-minus removefilter" aria-hidden="true"></span>
+            </div>
+        </div>
+        }
+    }
+</div>
+
+
+<div id="filterrow_@filters.size()">
+    <div class="form-group col-md-4">
+
+        <select id="filtertype_@filters.size()" name="filtertype_@filters.size()" class="form-control">
+            @for(f <- facetlist) {
+                <option value="@f.typ">@Messages(f.token)</option>
+            }
+        </select>
+    </div>
+    <div class="form-group col-md-3">
+        <select id="filter_relational_operator_@filters.size()" name="filter_relational_operator_@filters.size()" class="form-control">
+            @for(o <- operators) {
+                <option value="@o">@Messages("filter.operator."+o)</option>
+            }
+        </select>
+    </div>
+    <div class="form-group col-md-4">
+
+        <input type="text" class="form-control" id="filter_@filters.size()" name="filter_@filters.size()" >
+    </div>
+    <div class="col-md-1">
+        <span id="addbutton_@filters.size()" class="glyphicon glyphicon-plus addfilter" aria-hidden="true"></span>
+        <span id="removebutton_@filters.size()" class="glyphicon glyphicon-minus removefilter" aria-hidden="true"></span>
+    </div>
+</div>

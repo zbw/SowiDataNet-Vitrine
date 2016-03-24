@@ -68,6 +68,7 @@ public class Item {
             JsonNode bitstreamsNode = itemNode.get("bitstreams");
             for(JsonNode bitstreamNode : bitstreamsNode) {
                 Bitstream bitstream = Bitstream.parseBitstreamFromJSON(bitstreamNode);
+                bitstream.link =  item.handle + "/" + bitstream.name + "?sequence=" + bitstream.sequence + "&isAllowed=y";
                 item.bitstreams.add(bitstream);
             }
         }

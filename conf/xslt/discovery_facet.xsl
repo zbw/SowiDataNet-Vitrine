@@ -37,7 +37,7 @@
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h3 class="panel-title">
-                        <a role="button" data-toggle="collapse" aria-expanded="false">
+                        <a class="panel-toggle" role="button" data-toggle="collapse" aria-expanded="false">
                             <xsl:attribute name="href">#<xsl:value-of select="$titleid" /> </xsl:attribute>
                             <xsl:attribute name="aria-controls"><xsl:value-of select="$titletag" /> </xsl:attribute>
 
@@ -53,10 +53,17 @@
         <xsl:for-each select="item">
             <xsl:if test="not(contains(xref/.,'view-more'))">
             <div>
+                <xsl:choose>
+                <xsl:when test="@rend">
+                    <xsl:value-of select="."/>
+                </xsl:when>
+                    <xsl:otherwise>
                 <a>
                 <xsl:attribute name="href">/<xsl:value-of select="$institut.id"/>/discover/<xsl:value-of select="$basehandle"/>/<xsl:value-of select="$handle"/>/<xsl:value-of select="substring-after(xref/@target,'discover')"/></xsl:attribute>
                 <xsl:value-of select="xref/."/>
                 </a>
+                    </xsl:otherwise>
+                </xsl:choose>
             </div>
             </xsl:if>
         </xsl:for-each>

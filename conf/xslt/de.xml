@@ -4,7 +4,6 @@
         <phrase token="xmlui.ArtifactBrowser.AdvancedSearch.type_dateIssued">Datum</phrase>
         <phrase token="xmlui.ArtifactBrowser.AdvancedSearch.type_subject">Subjekt</phrase>
         <phrase token="xmlui.ArtifactBrowser.AdvancedSearch.type_language">Sprache</phrase>
-
         <phrase token="xmlui.ArtifactBrowser.AdvancedSearch.type_pubyear">Jahr der Veröffentlichung</phrase>
         <phrase token="xmlui.ArtifactBrowser.AdvancedSearch.type_institution">Institution</phrase>
         <phrase token="xmlui.ArtifactBrowser.AdvancedSearch.type_availability">Verfügbarkeit</phrase>
@@ -13,5 +12,28 @@
         <phrase token="xmlui.ArtifactBrowser.AdvancedSearch.type_spatial">Untersuchungsgebiet</phrase>
         <phrase token="xmlui.ArtifactBrowser.AdvancedSearch.type_universe">Grundgesamtheit</phrase>
         <phrase token="xmlui.ArtifactBrowser.AdvancedSearch.type_method">Erhebungsverfahren</phrase>
+
+        <phrase token="xmlui.ArtifactBrowser.SimpleSearch.filter.author">Author</phrase>
+        <phrase token="xmlui.ArtifactBrowser.SimpleSearch.filter.dateIssued">Datum</phrase>
+        <phrase token="xmlui.ArtifactBrowser.SimpleSearch.filter.subject">Subjekt</phrase>
+        <phrase token="xmlui.ArtifactBrowser.SimpleSearch.filter.language">Sprache</phrase>
+        <phrase token="xmlui.ArtifactBrowser.SimpleSearch.filter.pubyear">Jahr der Veröffentlichung</phrase>
+        <phrase token="xmlui.ArtifactBrowser.SimpleSearch.filter.institution">Institution</phrase>
+        <phrase token="xmlui.ArtifactBrowser.SimpleSearch.filter.availability">Verfügbarkeit</phrase>
+        <phrase token="xmlui.ArtifactBrowser.SimpleSearch.filter.subjectOther">Fachgebiet</phrase>
+        <phrase token="xmlui.ArtifactBrowser.SimpleSearch.filter.classification">Kategorie</phrase>
+        <phrase token="xmlui.ArtifactBrowser.SimpleSearch.filter.spatial">Untersuchungsgebiet</phrase>
+        <phrase token="xmlui.ArtifactBrowser.SimpleSearch.filter.universe">Grundgesamtheit</phrase>
+        <phrase token="xmlui.ArtifactBrowser.SimpleSearch.filter.method">Erhebungsverfahren</phrase>
+
+        <phrase token="pager.back">zurück</phrase>
+        <phrase token="pager.forward">weiter</phrase>
+        <phrase token="pager.items">Dokumente</phrase>
+        <phrase token="pager.page">Seite</phrase>
+        <phrase token="pager.of">von</phrase>
+        <phrase token="pager.pages">Seiten</phrase>
+        <phrase token="label.researcher">Primärforscher / Institution</phrase>
+        <phrase token="label.pubyear">Publikationsjahr</phrase>
+        <phrase token="label.availability">Verfügbarkeit</phrase>
 
 </translations>

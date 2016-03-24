@@ -12,6 +12,7 @@ libraryDependencies ++= Seq(
   "junit" % "junit" % "4.12" % "test",
   "org.webjars" % "bootstrap" % "3.3.6",
   "org.webjars" % "respond" % "1.4.2",
+  "net.sf.saxon" % "Saxon-HE" % "9.7.0-4",
   "org.webjars" % "html5shiv" % "3.7.3"
 )
 

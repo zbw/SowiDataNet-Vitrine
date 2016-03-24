@@ -1,12 +1,22 @@
 package utils;
 
+import model.Facet;
+import model.Filter;
 import model.Institution;
+import org.w3c.dom.Document;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.InputSource;
+import play.Logger;
 import play.Play;
 import play.libs.F;
+import play.libs.XPath;
 import play.libs.ws.WSClient;
 import play.libs.ws.WSResponse;
 import play.mvc.Controller;
 
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.transform.Source;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerFactory;
@@ -15,6 +25,8 @@ import javax.xml.transform.stream.StreamSource;
 import java.io.StringReader;
 import java.io.StringWriter;
 import java.net.URLEncoder;
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -86,13 +98,88 @@ public class Discovery extends Controller {
         return facetbox;
     }
 
+    public static F.Promise<String> availableFacets(F.Promise<String> xmlPromise, Institution inst) {
+        String handle = inst.handle;
+        F.Promise<String> facets = xmlPromise.map(xml ->{
+            String facetbody = "";
+            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder builder;
+            try
+            {
+                //get the available facets
+                ArrayList<Facet> facetlist = new ArrayList<Facet>();
+                builder = factory.newDocumentBuilder();
+                Document doc = builder.parse( new InputSource( new StringReader( xml ) ) );
+                NodeList nodes = XPath.selectNodes("//cell/field[@id='aspect.discovery.SimpleSearch.field.filtertype_1']", doc);
+                if (nodes.getLength() > 0 ) {
+                    Node node = nodes.item(0);
+                    NodeList options = XPath.selectNodes("option", node);
+                    for ( int i =0;i<options.getLength(); i++) {
+                         String value = XPath.selectText("@returnValue",options.item(i));
+                        facetlist.add(new Facet(value,"facetoption."+value));
+                    }
+                }
+                // get the available operators
+                NodeList operators = XPath.selectNodes("//cell/field[@id='aspect.discovery.SimpleSearch.field.filter_relational_operator_1']", doc);
+                List<String> operatorlist = new ArrayList<String>();
+                if (operators.getLength()>0) {
+                    Node node = operators.item(0);
+                    NodeList options = XPath.selectNodes("option", node);
+                    for ( int i =0;i<options.getLength(); i++) {
+                        String value = XPath.selectText("@returnValue", options.item(i));
+                        operatorlist.add(value);
+                    }
+                }
+                // get the checked facets
+                NodeList hiddenfields = XPath.selectNodes("//div[@n='main-form']/p/field[starts-with(@n, 'filter')]", doc);
+                Logger.debug("hf size: "+hiddenfields.getLength());
+                List<Filter> filters = new ArrayList<Filter>();
+                for ( int i =0;i<hiddenfields.getLength(); i++) {
+                    Node field = hiddenfields.item(i);
+                    String label =  XPath.selectText("@n", field);
+                    String id = label.substring(label.lastIndexOf("_")+1);
+                    label = label.substring(0,label.lastIndexOf("_"));
+                    String value = XPath.selectText("value/text()", field);
+                    Filter filter = new Filter();
+                    filter.id = Integer.parseInt(id);
+
+                    Logger.debug(id + " "+label +":"+ value);
+
+                    if (filters.indexOf(filter)>=0) {
+                        int idx = filters.indexOf(filter);
+                        filter = filters.get(idx);
+                    } else {
+                        filters.add(filter);
+                    }
+                    if (label.startsWith("filtertyp")) {
+                        filter.typ = value;
+                    } else if (label.startsWith("filter_rel")) {
+                        filter.relationalOperator = value;
+                    } else {
+                        filter.filter = value;
+                        if (filter.filter.equals("")) {
+                            filters.remove(filter);
+                        }
+                    }
+                }
+
+                facetbody = views.html.allFacets.render(facetlist, operatorlist, filters).body();
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            return facetbody;
+        });
+        return facets;
+    }
 
     public static F.Promise<String> resultList(F.Promise<String> xmlPromise, Institution inst) {
         F.Promise<String> resultListPromise = xmlPromise.map(xml -> {
             Source xmlsource = new StreamSource(new StringReader(xml));
             String resultListBody = "";
             Source xslt = new StreamSource(Play.application().classloader().getResourceAsStream("xslt/discovery_results.xsl"));
-            TransformerFactory transFact = TransformerFactory.newInstance();
+            TransformerFactory transFact =  net.sf.saxon.TransformerFactoryImpl.newInstance();
             Transformer trans = transFact.newTransformer(xslt);
             trans.setParameter("lang", "de");
             trans.setParameter("path", "./conf/xslt/") ;

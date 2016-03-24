@@ -1,8 +1,8 @@
 xmlui.ArtifactBrowser.AdvancedSearch.type_author = Autor
 xmlui.ArtifactBrowser.AdvancedSearch.type_dateIssued = Datum
-xmlui.ArtifactBrowser.AdvancedSearch.type_pubyear = Jahr der Ver�ffentlichung
+xmlui.ArtifactBrowser.AdvancedSearch.type_pubyear = Jahr der Veröffentlichung
 xmlui.ArtifactBrowser.AdvancedSearch.type_institution = Institution
-xmlui.ArtifactBrowser.AdvancedSearch.type_availability = Verf�gbarkeit
+xmlui.ArtifactBrowser.AdvancedSearch.type_availability = Verfügbarkeit
 xmlui.ArtifactBrowser.AdvancedSearch.type_subjectOther = Fachgebiet
 xmlui.ArtifactBrowser.AdvancedSearch.type_classification = Kategorie
 xmlui.ArtifactBrowser.AdvancedSearch.type_spatial = Untersuchungsgebiet
@@ -19,3 +19,23 @@ dbk_version_series_desc = Versionsnummer
 hid_cb_submit_dbk_software_add_desc__0 =  Software
 dbk_resourcetype_series_desc = Typ der Forschungsdaten
 dbk_dataset_variable_desc = Anzahl der Variablen
+
+facetoption.author = Autor
+facetoption.dateIssued = Datum
+facetoption.pubyear = Jahr der Veröffentlichung
+facetoption.institution = Institution
+facetoption.availability = Verfügbarkeit
+facetoption.subjectOther = Fachgebiet
+facetoption.classification = Kategorie
+facetoption.spatial = Untersuchungsgebiet
+facetoption.universe = Grundgesamtheit
+facetoption.method = Erhebungsverfahren
+facetoption.title = Title
+facetoption.subject = Subject
+
+filter.operator.contains    =  enthält
+filter.operator.equals      =  gleich
+filter.operator.authority   =  Kennung
+filter.operator.notcontains =  enthät nicht
+filter.operator.notequals   =  nicht gleich
+filter.operator.notauthority=  keine Kennung

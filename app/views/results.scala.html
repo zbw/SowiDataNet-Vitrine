@@ -1,25 +1,56 @@
 @import model.Institution
 @import model.Community
-@(facets: String, results: String, institution: Institution, query: String, community: Community)
+@import model.Facet
+@import model.Filter
+@import java.util
+@import play.libs.F
+@(facets: String, results: String, facetlist: String, institution: Institution,  query: String, community: Community, filters: List[Filter])
 
 
 @main(institution, community) {
     <div class="sdn_body">
-        <div class="sdn_sidebar">@Html(facets)  </div>
+        <div class="sdn_sidebar">
+            @if(!filters.isEmpty()) {
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Filter </h3>
+                    </div>
+                    <div class="panel-body">
+                <ul class="list-unstyled">
+                @for(filter <- filters) {
+                     <li><a class="text-danger" href="@filter.queryWithoutFilter"><i class="glyphicon glyphicon-remove"></i>@filter.filter</a></li>
+                }
+                </ul>
+                    </div>
+                </div>
+            }
+        @Html(facets)
+
+        </div>
         <div class="sdn_content">
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h3 class="panel-title">Suche</h3>
             </div>
             <div class="panel-body">
-                @helper.form(action = routes.SearchApplication.search(institution.id)) {
 
-                    <div class="form-group">
+                @helper.form(action = routes.SearchApplication.search(institution.id)) {
+                    <div class="row">
+                    <div class="form-group col-xs-12">
                         <label for="query">Volltextsuche</label>
                         <input type="text" name="query" class="form-control" id="inputquery" value="@query">
                     </div>
-                    <button type="submit" class="btn btn-default">Suchen</button>
+                    </div>
+                <div class="row">
+                    @Html(facetlist)
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <button type="submit" class="btn btn-default">Suchen</button>
+                    </div>
+                </div>
                 }
+
             </div>
         </div>
 

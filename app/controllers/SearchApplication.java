@@ -3,10 +3,7 @@ package controllers;
 
 import actions.ContextAction;
 import com.fasterxml.jackson.databind.JsonNode;
-import model.Community;
-import model.Institution;
-import model.Item;
-import model.RestResponse;
+import model.*;
 import play.Logger;
 import play.libs.F;
 import play.libs.Json;
@@ -24,7 +21,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.Map;
+import java.util.*;
 
 public class SearchApplication extends Controller {
 
@@ -43,28 +40,67 @@ public class SearchApplication extends Controller {
         handle = inst.handle;
         String params = queryString();
         String query = request().getQueryString("query");
-        return search(inst, query, params);
+        return search(inst, query, params,  handle);
     }
 
     @With(ContextAction.class)
     public F.Promise<Result> search(String institution) {
         Institution inst = (Institution) ctx().args.get("institution");
+        String params = queryString();
         String query = request().getQueryString("query");
-        return search(inst, query, null);
+        return search(inst, query, params,  null);
     }
-    public F.Promise<Result> search(final Institution inst,final String query,final String params) {
+    public F.Promise<Result> search1(final Institution inst,final String query,final String params, String handle) {
         F.Promise<String> xmlPromise = Discovery.getXML(ws, inst, query, params);
         F.Promise<String> facetsPromise = Discovery.facetBox(xmlPromise, inst);
         F.Promise<String> resultsPromise = Discovery.resultList(xmlPromise, inst);
-
+        F.Promise<String> facetListPromise = Discovery.availableFacets(xmlPromise, inst);
+        List<Filter> filters = getFiltered(params, inst, handle);
         F.Promise<Result> result =
-                F.Promise.sequence(facetsPromise, resultsPromise).map(components -> {
-                    return ok(views.html.results.render(components.get(0), components.get(1), inst, query, getCommunity(inst)));
+                F.Promise.sequence(facetsPromise, resultsPromise, facetListPromise).map(components -> {
+                    Logger.debug("filters: "+ filters.toString());
+                    return ok(views.html.results.render(components.get(0), components.get(1),components.get(2),inst, query, getCommunity(inst), filters));
                 });
         return result;
 
     }
+    public F.Promise<Result> search(final Institution inst,final String query,final String params, String handle) {
+        F.Promise<String> xmlPromise = Discovery.getXML(ws, inst, query, params);
+        List<Filter> filters = getFiltered(params, inst, handle);
+        F.Promise<Result> result = F.Promise.sequence(
+                Discovery.facetBox(xmlPromise, inst),
+                Discovery.resultList(xmlPromise, inst),
+                Discovery.availableFacets(xmlPromise, inst))
+                .map( list -> {
 
+                    return ok(views.html.results.render(list.get(0), list.get(1),list.get(2),  inst, query, getCommunity(inst), filters));
+                });
+        return result;
+    }
+
+    private  List<Filter> getFiltered(String params, Institution inst, String handle) {
+        final Set<Map.Entry<String,String[]>> entries = request().queryString().entrySet();
+        List<Filter> filters = new ArrayList<>();
+        for (Map.Entry<String,String[]> entry : entries) {
+            final String key = entry.getKey();
+            final String value = Arrays.toString(entry.getValue());
+            if (key.startsWith("filtertype")) {
+                String post = key.substring(key.indexOf("filtertype") + 10);
+                if (post==null) post="";
+                String valuekey = key.replaceAll("type","");
+                String linkparams = params.replaceAll(key+"=(.*?)&","");
+                linkparams = linkparams.replaceAll("filter_relational_operator"+post+"=(.*?)&","");
+                linkparams = linkparams.replaceAll("filter"+post+"=(.*?)&","");
+                Filter filter = new Filter();
+                filter.queryWithoutFilter = "/"+inst.id+"/discover/"+inst.basehandle+"/"+ handle + "/?"+linkparams;
+                filter.typ= request().getQueryString(key);
+                filter.filter = request().getQueryString(valuekey);
+                filter.relationalOperator = request().getQueryString("filter_relational_operator"+post);
+                filters.add(filter);
+            }
+        }
+        return filters;
+    }
     public static Community getCommunity(Institution inst) {
         RestResponse response = Community.findInstitutionByHandle(inst);
         if(response.modelObject instanceof Community) {

@@ -8,20 +8,53 @@ body {
   background: @content-bg;
 }
 
+.sdn_header {
+  background: @content-bg;
+  margin-top:10px;
+  .make-row();
+  .sdn_logo {
+    .make-md-column(4);
+    .make-xs-column(4);
+    background-image: url(@logo-url);
+    background-repeat: no-repeat;
+    min-height: 60px;
+    background-position: 10px 15px;
+
+  }
+  .sdn_title {
+    .make-md-column(8);
+    .make-md-column-push(0);
+    .make-xs-column(6);
+    .make-xs-column-push(2)
+  }
+}
+
 .sdn_body {
   .make-row();
   .sdn_sidebar {
     .make-md-column(4);
-    .make-sm-column-push(8)
+
   }
   .sdn_content {
     .make-md-column(8);
-    .make-sm-column-pull(4);
+
   }
 }
 
 .panel-title {
   font-size:12px;
+}
+
+.panel-heading .panel-toggle:after {
+  /* symbol for "opening" panels */
+  font-family: 'Glyphicons Halflings';  /* essential for enabling glyphicon */
+  content: "\e114";    /* adjust as needed, taken from bootstrap.css */
+  float: right;        /* adjust as needed */
+  color: grey;         /* adjust as needed */
+}
+.panel-heading .panel-toggle.collapsed:after {
+  /* symbol for "collapsed" panels */
+  content: "\e080";    /* adjust as needed, taken from bootstrap.css */
 }
 .resultrow {
   margin-bottom: 20px;
@@ -29,4 +62,27 @@ body {
 
 .panel-default>.panel-heading {
   background-color: #c0deda;
+}
+
+.pagerinfo {
+  width:70%;
+  float:left;
+  margin-top:6px;
+}
+
+.listitem {
+  .make-row();
+  margin-bottom: 3px;
+  .listitemlabel {
+    .make-md-column(3);
+    font-weight: bold;
+  }
+  .listitemvalue {
+    .make-md-column(9);
+
+  }
+}
+
+.addfilter, .removefilter {
+  cursor: pointer;
 }

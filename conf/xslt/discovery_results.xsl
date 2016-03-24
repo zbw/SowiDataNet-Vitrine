@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+<xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
                 xmlns:dyn="http://exslt.org/dynamic"
                 extension-element-prefixes="dyn">
     <xsl:output method="html"/>
@@ -33,19 +33,61 @@
 
     <xsl:template match="//div[@id='aspect.discovery.SimpleSearch.div.search-results']">
     <!-- xsl:template match="//list[@n='item-result-list']" -->
-        <div id="paging"><xsl:value-of select="@itemsTotal"/> Items <xsl:value-of select="@pagesTotal"/> pagesTotal</div>
+        <div id="paging">
+
+            <ul class="pager">
+            <xsl:choose>
+                <xsl:when test="@currentPage > 1">
+                    <li class="previous">
+                    <a class="btn btn-default">
+                        <xsl:variable name="backlink" select="@pageURLMask"/>
+                        <xsl:variable name="lastpage" select="@currentPage -1"/>
+                        <xsl:variable name="backlink" select="replace($backlink, '\{pageNum\}', string($lastpage))"/>
+                    <xsl:attribute name="href"><xsl:value-of select="replace($backlink, 'discover', '')"/>> </xsl:attribute>
+                        <xsl:call-template name="translate"><xsl:with-param name="token">pager.back</xsl:with-param></xsl:call-template>
+                    </a>
+                    </li>
+                </xsl:when>
+            </xsl:choose>
+                <div class="pagerinfo">
+                    <xsl:value-of select="@itemsTotal"/>&#160; <xsl:call-template name="translate"><xsl:with-param name="token">pager.items</xsl:with-param></xsl:call-template>&#160; |&#160; <xsl:call-template name="translate"><xsl:with-param name="token">pager.page</xsl:with-param></xsl:call-template> &#160;<xsl:value-of select="@currentPage"/> &#160;<xsl:call-template name="translate"><xsl:with-param name="token">pager.of</xsl:with-param></xsl:call-template>&#160; <xsl:value-of select="@pagesTotal"/>&#160;<xsl:call-template name="translate"><xsl:with-param name="token">pager.pages</xsl:with-param></xsl:call-template>
+                </div>
+            <xsl:choose>
+                <xsl:when test="@currentPage != @pagesTotal">
+                    <li class="next">
+                    <a class="btn btn-default">
+                        <xsl:variable name="backlink" select="@pageURLMask"/>
+                        <xsl:variable name="lastpage" select="@currentPage +1"/>
+                        <xsl:variable name="backlink" select="replace($backlink, '\{pageNum\}', string($lastpage))"/>
+                        <xsl:attribute name="href"><xsl:value-of select="replace($backlink, 'discover', '')"/>> </xsl:attribute>
+                        <xsl:call-template name="translate">
+                            <xsl:with-param name="token">pager.forward</xsl:with-param>
+                        </xsl:call-template>
+                    </a>
+                    </li>
+                </xsl:when>
+            </xsl:choose>
+            </ul>
+
+        </div>
 
         <ul class="list-group">
         <xsl:for-each select="list/list[@n='item-result-list']/list">
             <li class="list-group-item">
                 <xsl:variable name="id" select="substring-after(list[contains(@n,'dc.identifier.uri')]/item,concat($basehandle,'/'))"/>
-                <div class="listitemheader"><a href="/{$institut.id}/item/{$handle}/{$id}"><xsl:value-of select="list[contains(@n,'dc.title')]/item"/></a> </div>
-                <div class="listitemcontributor">
-                    <xsl:for-each select="list[contains(@n,'dc.contributor')]/item">
-                        <xsl:value-of select="."/>;
+                <h4 class="listitemheader"><a href="/{$institut.id}/item/{$handle}/{$id}"><xsl:value-of select="list[contains(@n,'dc.title')]/item"/></a> </h4>
+                <div class="listitem">
+                <div class="listitemlabel"><xsl:call-template name="translate"><xsl:with-param name="token">label.researcher</xsl:with-param></xsl:call-template></div>
+                <div class="listitemvalue">
+                    <xsl:for-each select="list[ends-with(@n,'dbk.primaryresearcher')]/item">
+                        <div><xsl:value-of select="."/></div>
                     </xsl:for-each>
                 </div>
-                <div class="listitemdate"><xsl:value-of select="list[contains(@n,'dc.date.issued')]/item"/> </div>
+                </div>
+                <div class="listitem">
+                <div class="listitemlabel"><xsl:call-template name="translate"><xsl:with-param name="token">label.pubyear</xsl:with-param></xsl:call-template></div>
+                    <div class="listitemvalue"><xsl:value-of select="list[contains(@n,'publicationyear')]/item"/> </div>
+                </div>
          </li>
         </xsl:for-each>
         </ul>

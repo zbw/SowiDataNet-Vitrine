@@ -15,7 +15,8 @@ import java.util.LinkedHashMap;
  * To change this template use File | Settings | File Templates.
  */
 public class Bitstream {
-    public String name, description, format, mimeType, bundleName, retrieveLink, checksum;
+    public String name, description, format, mimeType, bundleName, retrieveLink, checksum, link;
+    public int sequence;
     public Long sizeBytes;
     public LinkedHashMap<String, String> descriptions;
 
@@ -49,7 +50,7 @@ public class Bitstream {
         bitstream.sizeBytes = bitstreamNode.get("sizeBytes").asLong();
         bitstream.retrieveLink = bitstreamNode.get("retrieveLink").asText();
         bitstream.checksum = bitstreamNode.get("checkSum").get("value").asText();
-
+        bitstream.sequence = bitstreamNode.get("sequenceId").asInt();
         return bitstream;
     }
 }
