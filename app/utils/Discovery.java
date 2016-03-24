@@ -143,7 +143,6 @@ public class Discovery extends Controller {
                     Filter filter = new Filter();
                     filter.id = Integer.parseInt(id);
 
-                    Logger.debug(id + " "+label +":"+ value);
 
                     if (filters.indexOf(filter)>=0) {
                         int idx = filters.indexOf(filter);
