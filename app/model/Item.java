@@ -3,6 +3,7 @@ package model;
 import com.fasterxml.jackson.databind.JsonNode;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -36,7 +37,7 @@ public class Item {
     public List<Community>  communities = new ArrayList<Community>();
 
 
-    public static Item parseItemFromJSON(JsonNode itemNode) {
+    public static Item parseItemFromJSON(JsonNode itemNode,Institution inst) {
         Item item = new Item();
 
         item.id = itemNode.get("id").asLong();
@@ -59,8 +60,12 @@ public class Item {
             for(JsonNode field : metadataNode) {
                 String key = field.get("key").asText();
                 String value = field.get("value").asText();
-                item.metadata.add(new MetadataField(key, value));
+                int idx = inst.metafields.indexOf(key);
+                if (idx >=0) {
+                    item.metadata.add(new MetadataField(key, value, idx));
+                }
             }
+            Collections.sort(item.metadata);
         }
 
         if(itemNode.has("bitstreams")) {

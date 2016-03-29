@@ -133,7 +133,7 @@ public class Collection {
         JsonNode itemNodes = collectionJSON.get("items");
         if(itemNodes != null) {
             for(JsonNode itemNode : itemNodes) {
-                Item item = Item.parseItemFromJSON(itemNode);
+                Item item = Item.parseItemFromJSON(itemNode, new Institution());
                 collection.items.add(item);
             }
         }

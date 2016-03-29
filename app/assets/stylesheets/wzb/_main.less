@@ -3,6 +3,42 @@ body {
   font-family: arial, helvetica, sans-serif;
   font-size:12px;
 }
+.container {
+  background: @content-bg;
+}
+
+.sdn_header {
+  background: @content-bg;
+  margin-top:10px;
+  .make-row();
+  .sdn_logo {
+    .make-md-column(4);
+    .make-xs-column(4);
+    background-image: url(@logo-url);
+    background-repeat: no-repeat;
+    min-height: 60px;
+    background-position: 10px 15px;
+
+  }
+  .sdn_title {
+    .make-md-column(8);
+    .make-md-column-push(0);
+    .make-xs-column(6);
+    .make-xs-column-push(2)
+  }
+}
+
+.sdn_body {
+  .make-row();
+  .sdn_sidebar {
+    .make-md-column(4);
+
+  }
+  .sdn_content {
+    .make-md-column(8);
+
+  }
+}
 a {
   color:#000000;
 }
@@ -35,7 +71,7 @@ a:hover {
   font-size:12px;
 }
 .resultrow {
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 
 .panel-default>.panel-heading {

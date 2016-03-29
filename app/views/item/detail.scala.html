@@ -1,6 +1,7 @@
-@import model.Institution
+@import model.Institution ; var prevmd = "";
 
 @(item: model.Item, institution: Institution, community: model.Community)
+
 
 @main(institution, community) {
     <div class="sdn_body">
@@ -46,12 +47,22 @@
                     </div>
                     <div class="collapse" id="collapseMeta">
                         <div class="panel-body">
+
                         @for(metadataField <- item.metadata) {
-                            <div class="row resultrow">
-                                <div class="col-sm-4">@metadataField.key</div>
-                                <div class="col-sm-8">@metadataField.value</div>
-                            </div>
+                            @if(metadataField.key != prevmd) {
+                                <div class="row resultrow">
+                                    <div class="col-sm-3"><label>@Messages(metadataField.key)</label></div>
+                                    <div class="col-sm-9">@metadataField.value</div>
+                                </div>
+                            } else {
+                                <div class="row resultrow">
+                                    <div class="col-sm-3"></div>
+                                    <div class="col-sm-9">@metadataField.value</div>
+                                </div>
+                            }
+                            @(prevmd = metadataField.key)
                         }
+
                         </div>
                     </div>
                 </div>

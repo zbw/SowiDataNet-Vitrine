@@ -1,5 +1,7 @@
 package model;
 
+import java.util.List;
+
 /**
  * Created by Ott Konstantin on 14.12.2015.
  */
@@ -12,4 +14,5 @@ public class Institution {
     public String port;
     public String basepath;
     public String basehandle;
+    public List<String> metafields;
 }

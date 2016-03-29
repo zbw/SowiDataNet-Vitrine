@@ -39,3 +39,26 @@ filter.operator.authority   =  Kennung
 filter.operator.notcontains =  enthät nicht
 filter.operator.notequals   =  nicht gleich
 filter.operator.notauthority=  keine Kennung
+
+dc.contributor =  Mitwirkende
+dc.coverage.spatial = Untersuchungsgebiet
+dc.date.accessioned =  Zugang
+dc.date.available = verfügbar
+dc.date.issued = veröffentlicht
+dc.identifier.uri = URI
+dc.description = Beschreibung
+dc.rights =  Lizenzen
+dc.subject.classification = Kategorie
+dc.subject.other = Fachgebiet
+dc.title =  Titel
+dbk.publicationyear = Publikationsjahr
+dbk.primaryresearcher = Primärforscher
+dbk.surveyperiod =  Erhebungszeitraum
+dbk.datacollectionmethod =  Erhebungsverfahren
+dbk.universe = Grundgesamtheit
+dbk.issuer =  Herausgeber
+dbk.selectionmethod =  Auswahlverfahren
+dbk.availability =   Verfügbarkeit
+
+
+

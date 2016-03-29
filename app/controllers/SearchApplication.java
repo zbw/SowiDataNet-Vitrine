@@ -144,7 +144,7 @@ public class SearchApplication extends Controller {
             Item item = new Item();
 
             if (node.size() > 0) {
-                item = Item.parseItemFromJSON(node);
+                item = Item.parseItemFromJSON(node, inst);
             }
 
             return ok(views.html.item.detail.render(item, inst,getCommunity(inst)));
