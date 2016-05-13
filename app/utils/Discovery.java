@@ -12,6 +12,7 @@ import play.Play;
 import play.libs.F;
 import play.libs.XPath;
 import play.libs.ws.WSClient;
+import play.libs.ws.WSRequest;
 import play.libs.ws.WSResponse;
 import play.mvc.Controller;
 
@@ -24,7 +25,6 @@ import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 import java.io.StringReader;
 import java.io.StringWriter;
-import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,35 +34,30 @@ import java.util.List;
  */
 public class Discovery extends Controller {
 
-
-
-
-
-    //public static String baseRestUrl = "http://dspace.vm:8080/rest";
-    //public static String baseProt = ConfigFactory.load().getString("baseprot");
-    //public static String baseHost = ConfigFactory.load().getString("basehost");
-    //public static String basePort = ConfigFactory.load().getString("baseport");
-    //public static String basePath = ConfigFactory.load().getString("basepath");
-    //public static String baseHandle = ConfigFactory.load().getString("basehandle");
-
     public Discovery() {}
 
-    public static F.Promise<String> getXML(WSClient ws,Institution inst, String query, String params) {
+    public static F.Promise<String> getXML(WSClient ws,Institution inst, String params) {
         String port = "";
         if (inst.port!=null && !inst.port.equals("")) {
             port = ":" + inst.port;
         }
-        String querypar = "";
-        if (params != null) {
-            querypar += params;
-        }
-        if (query != null) {
-            querypar += "query="+ URLEncoder.encode(query)+ "&";
-        }
 
-        querypar += "XML";
+        if (params==null) {
+            params = "XML";
+        }   else {
+            params += "XML";
+        }
+        //there has to be a filter param. Else the filterlist will not show
+        params += "&submit=Los&filter_100=";
         String url = inst.prot+"://"+inst.host+port+"/"+inst.basepath+"/handle/" + inst.basehandle +"/"+inst.handle+"/discover";
-        F.Promise<WSResponse> wsPromise = ws.url(url).setQueryString(querypar).get();
+        String cookie = session("JSESSIONID");
+        WSRequest wsRequest =   ws.url(url);
+        if (cookie!=null && !cookie.equals("")) {
+            wsRequest =   ws.url(url +";jsessionid="+cookie);
+            wsRequest.setHeader("Cookie", "JSESSIONID=" + cookie);
+        }
+        wsRequest.setQueryString(params);
+        F.Promise<WSResponse> wsPromise = wsRequest.get();
         F.Promise<String> xml = wsPromise.map(response -> {
 
             // got some problems with this namespace. So I remove it...
@@ -70,7 +65,6 @@ public class Discovery extends Controller {
             //Source xml = new DOMSource(document);
             String resultstring = response.getBody();
             resultstring = resultstring.replaceFirst("<document xmlns=\"http://di.tamu.edu/DRI/1.0/\" xmlns:i18n=\"http://apache.org/cocoon/i18n/2.1\" version=\"1.1\">", "<document xmlns:i18n=\"http://apache.org/cocoon/i18n/2.1\">");
-            System.out.println("getXML");
             return resultstring;
         });
         return xml;
@@ -111,6 +105,9 @@ public class Discovery extends Controller {
                 builder = factory.newDocumentBuilder();
                 Document doc = builder.parse( new InputSource( new StringReader( xml ) ) );
                 NodeList nodes = XPath.selectNodes("//cell/field[@id='aspect.discovery.SimpleSearch.field.filtertype_1']", doc);
+                if (nodes.getLength() == 0 ) {
+                    nodes = XPath.selectNodes("//cell/field[@id='aspect.discovery.SimpleSearch.field.filtertype_2']", doc);
+                }
                 if (nodes.getLength() > 0 ) {
                     Node node = nodes.item(0);
                     NodeList options = XPath.selectNodes("option", node);
@@ -121,6 +118,9 @@ public class Discovery extends Controller {
                 }
                 // get the available operators
                 NodeList operators = XPath.selectNodes("//cell/field[@id='aspect.discovery.SimpleSearch.field.filter_relational_operator_1']", doc);
+                if (operators.getLength()==0) {
+                    operators = XPath.selectNodes("//cell/field[@id='aspect.discovery.SimpleSearch.field.filter_relational_operator_2']", doc);
+                }
                 List<String> operatorlist = new ArrayList<String>();
                 if (operators.getLength()>0) {
                     Node node = operators.item(0);

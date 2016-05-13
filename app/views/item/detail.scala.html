@@ -25,6 +25,13 @@
     </div>
 
     <div class="sdn_content">
+        @if(item == null ) {
+            <div class="simple-item-view-description">
+                <h3 class="bold">Error:</h3>
+                <div>No item found!</div>
+            </div>
+
+            } else {
 
             <h1>@item.name</h1>
                 <div class="uri"><strong>Handle:</strong><a href="http://hdl.handle.net/@item.handle">http://hdl.handle.net/@item.handle</a></div>
@@ -99,7 +106,7 @@
             }
 
 
-
+    }
     </div>
     </div>
 

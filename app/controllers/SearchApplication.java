@@ -8,6 +8,8 @@ import play.Logger;
 import play.libs.F;
 import play.libs.Json;
 import play.libs.ws.WSClient;
+import play.libs.ws.WSRequest;
+import play.libs.ws.WSResponse;
 import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.With;
@@ -51,7 +53,7 @@ public class SearchApplication extends Controller {
         return search(inst, query, params,  null);
     }
     public F.Promise<Result> search1(final Institution inst,final String query,final String params, String handle) {
-        F.Promise<String> xmlPromise = Discovery.getXML(ws, inst, query, params);
+        F.Promise<String> xmlPromise = Discovery.getXML(ws, inst, params);
         F.Promise<String> facetsPromise = Discovery.facetBox(xmlPromise, inst);
         F.Promise<String> resultsPromise = Discovery.resultList(xmlPromise, inst);
         F.Promise<String> facetListPromise = Discovery.availableFacets(xmlPromise, inst);
@@ -65,7 +67,7 @@ public class SearchApplication extends Controller {
 
     }
     public F.Promise<Result> search(final Institution inst,final String query,final String params, String handle) {
-        F.Promise<String> xmlPromise = Discovery.getXML(ws, inst, query, params);
+        F.Promise<String> xmlPromise = Discovery.getXML(ws, inst, params);
         // for showing selected filters in the facet bar
         List<Filter> filters = getFiltered(params, inst, handle);
         //List<Filter> filters = new ArrayList<>();
@@ -90,15 +92,17 @@ public class SearchApplication extends Controller {
                 String post = key.substring(key.indexOf("filtertype") + 10);
                 if (post==null) post="";
                 String valuekey = key.replaceAll("type","");
-                String linkparams = params.replaceAll(key+"=(.*?)&","");
-                linkparams = linkparams.replaceAll("filter_relational_operator"+post+"=(.*?)&","");
-                linkparams = linkparams.replaceAll("filter"+post+"=(.*?)&","");
-                Filter filter = new Filter();
-                filter.queryWithoutFilter = "/"+inst.id+"/discover/"+inst.basehandle+"/"+ handle + "/?"+linkparams;
-                filter.typ= request().getQueryString(key);
-                filter.filter = request().getQueryString(valuekey);
-                filter.relationalOperator = request().getQueryString("filter_relational_operator"+post);
-                filters.add(filter);
+                if (!request().getQueryString(valuekey).equals("")) {
+                    String linkparams = params.replaceAll(key + "=(.*?)&", "");
+                    linkparams = linkparams.replaceAll("filter_relational_operator" + post + "=(.*?)&", "");
+                    linkparams = linkparams.replaceAll("filter" + post + "=(.*?)&", "");
+                    Filter filter = new Filter();
+                    filter.queryWithoutFilter = "/" + inst.id + "/discover/" + inst.basehandle + "/" + handle + "/?" + linkparams;
+                    filter.typ = request().getQueryString(key);
+                    filter.filter = request().getQueryString(valuekey);
+                    filter.relationalOperator = request().getQueryString("filter_relational_operator" + post);
+                    filters.add(filter);
+                }
             }
         }
         return filters;
@@ -126,7 +130,34 @@ public class SearchApplication extends Controller {
     }
 
     @With(ContextAction.class)
-    public Result showItem(String institution, String community, String handle) {
+    public F.Promise<Result> showItem(String institution, String community, String handle) {
+        Institution inst = (Institution) ctx().args.get("institution");
+        StringBuilder contentString = new StringBuilder();
+        String baseRestUrl = inst.prot+"://"+inst.host+":"+inst.port+"/rest/handle/" + inst.basehandle +"/" + handle + "?expand=metadata,bitstreams";
+        WSRequest request = ws.url(baseRestUrl);
+        String token = session("userToken");
+        if (token!=null) {
+            request.setHeader("rest-dspace-token", token);
+        }
+        F.Promise<WSResponse> promiseOfResponse = request.get();
+        F.Promise<Result> promiseOfResult = promiseOfResponse.map(response  -> {
+                                        if (response.getStatus() == 200) {
+                                            JsonNode node = response.asJson();
+                                            Item item = new Item();
+                                            if (node.size() > 0) {
+                                                item = Item.parseItemFromJSON(node, inst);
+                                            }
+                                            return ok(views.html.item.detail.render(item, inst, getCommunity(inst)));
+                                        } else {
+                                            flash("error" , "no rights");
+                                            return ok(views.html.login.render(inst,null, "Login", "", "", ""));
+                                        }
+                                        });
+        return promiseOfResult;
+    }
+
+    @With(ContextAction.class)
+    public Result showItem1(String institution, String community, String handle) {
         Institution inst = (Institution) ctx().args.get("institution");
         StringBuilder contentString = new StringBuilder();
         HttpURLConnection conn = null;
@@ -149,7 +180,7 @@ public class SearchApplication extends Controller {
 
             return ok(views.html.item.detail.render(item, inst,getCommunity(inst)));
         } catch (MalformedURLException e) {
-            return badRequest(e.getMessage());
+            return ok(views.html.item.detail.render(null, inst,getCommunity(inst)));
         } catch (IOException e) {
             return internalServerError(e.getMessage());
         } finally {
@@ -181,7 +212,8 @@ public class SearchApplication extends Controller {
         } else {
             conn = (HttpURLConnection) url.openConnection();
         }
-
+        //String token = "ee151264-598c-4b43-a935-56703a16e8cd";
+        //conn.setRequestProperty("rest-dspace-token",token);
         conn.setRequestMethod("GET");
         conn.setRequestProperty("Accept", "application/json");
         System.out.println(conn.getResponseCode());

@@ -2,7 +2,6 @@ package actions;
 
 import com.typesafe.config.ConfigFactory;
 import model.Institution;
-import play.Logger;
 import play.libs.F;
 import play.mvc.Http;
 import play.mvc.Result;
@@ -13,7 +12,6 @@ import play.mvc.Result;
 public class ContextAction extends play.mvc.Action.Simple {
     @Override
     public F.Promise<Result> call(Http.Context ctx) throws Throwable {
-        Logger.info("Calling action for " + ctx);
         Institution institution = new Institution();
         String institute = ctx.request().path();
         if (institute.length()>1) {

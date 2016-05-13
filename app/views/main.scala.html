@@ -25,7 +25,20 @@
             <div class="sdn_header">
                 <div class="sdn_logo">&nbsp;</div>
                 <div class="sdn_title"><h1><a href="@routes.Application.index(institution.id)">@if(community!=null){@community.name} else {SDN Vitrine} </a> <span class="badge">Prototyp</span></h1> </div>
+                @if(community != null) {
+                    @if(session.get("userToken")==null || session.get("userToken").equals("")) {
+                        <div class="sdn_login"><a class="btn btn-default" href="@routes.Application.login(institution.id)">Login</a></div>
+                    } else {
+                        <div class="sdn_login"><a class="btn btn-default" href="@routes.Application.logout(institution.id)">Logout</a></div>
+                    }
+                }
             </div>
+            @if(flash.containsKey("success")) {
+                <div class="alert alert-success" role="alert">@flash.get("success")</div>
+            }
+            @if(flash.containsKey("error")) {
+            <div class="alert alert-danger" role="alert">@flash.get("error")</div>
+            }
         @content
         </div>
             <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
