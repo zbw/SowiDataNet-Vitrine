@@ -216,7 +216,6 @@ public class SearchApplication extends Controller {
         //conn.setRequestProperty("rest-dspace-token",token);
         conn.setRequestMethod("GET");
         conn.setRequestProperty("Accept", "application/json");
-        System.out.println(conn.getResponseCode());
 
         if (conn.getResponseCode() != 200) {
             throw new MalformedURLException("Non-200 response: " +conn.getResponseCode() + " msg: " + conn.getResponseMessage() + " for: " + conn.getURL());

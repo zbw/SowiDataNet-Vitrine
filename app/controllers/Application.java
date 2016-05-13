@@ -85,7 +85,6 @@ public class Application extends Controller {
         F.Promise<String> cookie = startRequest.get().map(response -> {
             List cookies = response.getCookies();
             String body = response.getBody();
-            System.out.println(body);
             if (cookies.size()>0) {
                 String cook = response.getCookie("JSESSIONID").getValue();
                 //login
@@ -107,7 +106,6 @@ public class Application extends Controller {
             if (!t.equals("")) {
                 session("userToken", t);
                 String jsession = cookie.get(1000L);
-                System.out.println("COOKIE: "+ jsession);
                 if (!jsession.equals("")) {
                     session("JSESSIONID", jsession);
                 }
