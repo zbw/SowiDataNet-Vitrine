@@ -59,7 +59,7 @@ public class Application extends Controller {
         if(user == null || user.email() == null) {
             return ok(views.html.login.render(inst,user, "Login", "", "", ""));
         } else {
-            return redirect(routes.Application.index(null));
+            return redirect(routes.SearchApplication.start(null));
         }
     }
 

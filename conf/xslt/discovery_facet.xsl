@@ -50,9 +50,10 @@
                 </div>
             <div class="panel-body collapse">
                 <xsl:attribute name="id"><xsl:value-of select="$titleid" /> </xsl:attribute>
+                <ul class="list-group listfacet">
         <xsl:for-each select="item">
             <xsl:if test="not(contains(xref/.,'view-more'))">
-            <div>
+            <li class="listfacet-item">
                 <xsl:choose>
                 <xsl:when test="@rend">
                     <xsl:value-of select="."/>
@@ -64,9 +65,10 @@
                 </a>
                     </xsl:otherwise>
                 </xsl:choose>
-            </div>
+            </li>
             </xsl:if>
         </xsl:for-each>
+                </ul>
             </div>
             </div>
         </xsl:for-each>

@@ -59,6 +59,13 @@ dbk.universe = Grundgesamtheit
 dbk.issuer =  Herausgeber
 dbk.selectionmethod =  Auswahlverfahren
 dbk.availability =   Verfügbarkeit
+downloadOption1 =  für wissenschaftliche Forschung (einschließlich Promotion)
+downloadOption2 =  nicht da
+downloadOption3 =  in einer Lehrveranstaltung als Dozent/in
+downloadOption4 = im Rahmen des Studiums
+downloadOption5 = für Abschlussarbeit des Studiums (Bachelor-/Masterarbeit)
+downloadOption6 = für nichtwissenschaftliche Zwecke
+downloadOption7 = für Weiterbildung und Qualifikation
 
 
 

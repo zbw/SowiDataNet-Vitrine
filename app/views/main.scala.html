@@ -9,7 +9,11 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>@if(community!=null){community.name}</title>
+        @if(institution != null) {
         <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("stylesheets/"+institution.id + "/style.css")">
+        } else {
+            <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("stylesheets/zbw/style.css")">
+        }
         <link rel="shortcut icon" type="image/png" href="@routes.Assets.versioned("images/favicon.png")">
         <script src="@routes.Assets.versioned("javascripts/hello.js")" type="text/javascript"></script>
         <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -23,13 +27,18 @@
     <body>
         <div class="container">
             <div class="sdn_header">
-                <div class="sdn_logo">&nbsp;</div>
-                <div class="sdn_title"><h1><a href="@routes.Application.index(institution.id)">@if(community!=null){@community.name} else {SDN Vitrine} </a> <span class="badge">Prototyp</span></h1> </div>
-                @if(community != null) {
-                    @if(session.get("userToken")==null || session.get("userToken").equals("")) {
-                        <div class="sdn_login"><a class="btn btn-default" href="@routes.Application.login(institution.id)">Login</a></div>
-                    } else {
-                        <div class="sdn_login"><a class="btn btn-default" href="@routes.Application.logout(institution.id)">Logout</a></div>
+                @if(institution != null) {
+                    <div class="sdn_logo">&nbsp;</div>
+                    <div class="sdn_title"><h1><a href="@routes.SearchApplication.start(institution.id)">@if(community != null) {@community.name} else {SDN Vitrine} </a> <span class="badge">
+                        Prototyp</span></h1> </div>
+                    @if(community != null) {
+                        @if(session.get("userToken") == null || session.get("userToken").equals("")) {
+                            <div class="sdn_login"><a class="btn btn-default" href="@routes.Application.login(institution.id)">
+                                Login</a></div>
+                        } else {
+                            <div class="sdn_login"><a class="btn btn-default" href="@routes.Application.logout(institution.id)">
+                                Logout</a></div>
+                        }
                     }
                 }
             </div>
@@ -45,5 +54,6 @@
         <script type="text/javascript" src="@routes.Assets.at("lib/jquery/jquery.min.js")"></script>
         <script type="text/javascript" src="@routes.Assets.at("lib/bootstrap/js/bootstrap.js")"></script>
         <script src="@routes.Assets.versioned("javascripts/filters.js")" type="text/javascript"></script>
+
     </body>
 </html>

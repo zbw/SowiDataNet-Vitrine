@@ -46,6 +46,11 @@ public class SearchApplication extends Controller {
     }
 
     @With(ContextAction.class)
+    public F.Promise<Result> start(String institution) {
+        Institution inst = (Institution) ctx().args.get("institution");
+        return search(inst, null, "sort_by=dc.date.issued_dt&order=desc&",  inst.handle);
+    }
+    @With(ContextAction.class)
     public F.Promise<Result> search(String institution) {
         Institution inst = (Institution) ctx().args.get("institution");
         String params = queryString();

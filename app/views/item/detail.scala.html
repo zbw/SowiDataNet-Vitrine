@@ -80,12 +80,12 @@
                 @for(bitstream <- item.bitstreams) {
                     <div class="row resultrow">
                         <div class="col-sm-2">
-                            <a href="@(institution.prot)://@(institution.host):@(institution.port)/@(institution.basepath)/bitstream/handle/@(bitstream.link)">
+
                             <img style="height: 80px;" src="@routes.Assets.versioned("images/mime.png")" alt="Icon">
-                                </a>
+
                         </div>
-                        <div class="col-sm-10">
-                            <div><strong>Name: </strong><a href="@(institution.prot)://@(institution.host):@(institution.port)/@(institution.basepath)/bitstream/handle/@(bitstream.link)">@bitstream.name</a></div>
+                        <div class="col-sm-7">
+                            <div><strong>Name: </strong>@bitstream.name</div>
                             <div><strong>Bundle: </strong>@bitstream.bundleName</div>
                             <div><strong>Größe: </strong>@bitstream.sizeBytes</div>
                             <div><strong>Format: </strong>@bitstream.format</div>
@@ -100,6 +100,23 @@
                                   }
                                     </div>
 
+                        </div>
+
+                        <div class="col-sm-3">
+                            <div class="dropdown">
+                                <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+                                    Download
+                                    <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li><a target="_blank" href="@(institution.prot)://@(institution.host):@(institution.port)/@(institution.basepath)/bitstream/handle/@(bitstream.link)?downloadPurpose=1">@Messages("downloadOption1")</a></li>
+                                    <li><a target="_blank" href="@(institution.prot)://@(institution.host):@(institution.port)/@(institution.basepath)/bitstream/handle/@(bitstream.link)?downloadPurpose=3">@Messages("downloadOption3")</a></li>
+                                    <li><a target="_blank" href="@(institution.prot)://@(institution.host):@(institution.port)/@(institution.basepath)/bitstream/handle/@(bitstream.link)?downloadPurpose=4">@Messages("downloadOption4")</a></li>
+                                    <li><a target="_blank" href="@(institution.prot)://@(institution.host):@(institution.port)/@(institution.basepath)/bitstream/handle/@(bitstream.link)?downloadPurpose=5">@Messages("downloadOption5")</a></li>
+                                    <li><a target="_blank" href="@(institution.prot)://@(institution.host):@(institution.port)/@(institution.basepath)/bitstream/handle/@(bitstream.link)?downloadPurpose=6">@Messages("downloadOption6")</a></li>
+                                    <li><a target="_blank" href="@(institution.prot)://@(institution.host):@(institution.port)/@(institution.basepath)/bitstream/handle/@(bitstream.link)?downloadPurpose=7">@Messages("downloadOption7")</a></li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 }

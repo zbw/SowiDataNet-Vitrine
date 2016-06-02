@@ -4,7 +4,8 @@
 
 # Home page
 GET        /                                     controllers.Application.start()
-GET        /:institute                              controllers.Application.index(institute: String)
+# GET        /:institute                              controllers.Application.index(institute: String)
+GET        /:institute                              controllers.SearchApplication.start(institute: String)
 GET        /:institute/search                               controllers.SearchApplication.search(institute: String)
 GET        /:institute/discover/:basehandle/:handle/        controllers.SearchApplication.discover(institute: String, basehandle: String, handle: String)
 GET        /:institute/item/:community/:handle              controllers.SearchApplication.showItem(institute: String, community:String, handle: String)

@@ -31,9 +31,7 @@ public class ContextAction extends play.mvc.Action.Simple {
             institution.basehandle = ConfigFactory.load().getString(institute + ".basehandle");
             institution.metafields = ConfigFactory.load().getStringList(institute+".metadata");
         } else {
-            institution.id = "";
-            institution.handle = "27788";
-            institution.name = "Sowidata Vitrine";
+            institution = null;
 
         }
         ctx.args.put("institution", institution);
