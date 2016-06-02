@@ -8,3 +8,69 @@ xmlui.ArtifactBrowser.AdvancedSearch.type_classification = Topic Classification
 xmlui.ArtifactBrowser.AdvancedSearch.type_spatial = Geographical Area
 xmlui.ArtifactBrowser.AdvancedSearch.type_universe = Universe
 xmlui.ArtifactBrowser.AdvancedSearch.type_method = Data Collection Method
+
+label.search = Search
+label.fulltext = Fulltext
+label.searchbutton = Search
+label.filter = Filter
+
+dbk_file_desc =   file description
+dc_language_iso_desc =  language
+dbk_resourcetype_number_desc =  Type of data
+dbk_dataset_item_number_desc =  unit type
+dbk_dataset_item_series_desc = number of units
+dbk_version_number_desc =  version date
+dbk_version_series_desc = version number
+hid_cb_submit_dbk_software_add_desc__0 =  Software
+dbk_resourcetype_series_desc = Typ of research data
+dbk_dataset_variable_desc = number of variables
+
+facetoption.author = Author
+facetoption.dateIssued = Date
+facetoption.pubyear = year of publication
+facetoption.institution = institution
+facetoption.availability = availability
+facetoption.subjectOther = Fachgebiet
+facetoption.classification = catgory
+facetoption.spatial = Untersuchungsgebiet
+facetoption.universe = Grundgesamtheit
+facetoption.method = Erhebungsverfahren
+facetoption.title = Title
+facetoption.subject = Subject
+
+filter.operator.contains    =  contains
+filter.operator.equals      =  equal
+filter.operator.authority   =  Kennung
+filter.operator.notcontains =  enthält nicht
+filter.operator.notequals   =  nicht gleich
+filter.operator.notauthority=  keine Kennung
+
+dc.contributor =  Mitwirkende eng
+dc.coverage.spatial = Untersuchungsgebiet
+dc.date.accessioned =  Zugang
+dc.date.available = verfügbar
+dc.date.issued = veröffentlicht
+dc.identifier.uri = URI
+dc.description = Beschreibung
+dc.rights =  Lizenzen
+dc.subject.classification = Kategorie
+dc.subject.other = Fachgebiet
+dc.title =  Titel
+dbk.publicationyear = Publikationsjahr
+dbk.primaryresearcher = Primärforscher eng
+dbk.surveyperiod =  Erhebungszeitraum
+dbk.datacollectionmethod =  Erhebungsverfahren
+dbk.universe = Grundgesamtheit
+dbk.issuer =  Herausgeber
+dbk.selectionmethod =  Auswahlverfahren
+dbk.availability =   Verfügbarkeit
+downloadOption1 =  für wissenschaftliche Forschung (einschließlich Promotion)
+downloadOption2 =  nicht da
+downloadOption3 =  in einer Lehrveranstaltung als Dozent/in
+downloadOption4 = im Rahmen des Studiums
+downloadOption5 = für Abschlussarbeit des Studiums (Bachelor-/Masterarbeit)
+downloadOption6 = für nichtwissenschaftliche Zwecke
+downloadOption7 = für Weiterbildung und Qualifikation
+
+
+

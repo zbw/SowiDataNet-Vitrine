@@ -2,6 +2,7 @@ package actions;
 
 import com.typesafe.config.ConfigFactory;
 import model.Institution;
+import play.Logger;
 import play.libs.F;
 import play.mvc.Http;
 import play.mvc.Result;
@@ -35,6 +36,11 @@ public class ContextAction extends play.mvc.Action.Simple {
 
         }
         ctx.args.put("institution", institution);
+
+        //lang
+        String lang = ctx.request().getQueryString("lang");
+        ctx.changeLang(lang);
+        Logger.debug(ctx.lang().code());
         return delegate.call(ctx);
     }
 }

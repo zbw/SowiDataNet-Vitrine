@@ -10,7 +10,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>@if(community!=null){community.name}</title>
         @if(institution != null) {
-        <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("stylesheets/"+institution.id + "/style.css")">
+            <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("stylesheets/"+institution.id + "/style.css")">
+            <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("stylesheets/"+institution.id + ".css")">
         } else {
             <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("stylesheets/zbw/style.css")">
         }

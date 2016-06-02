@@ -78,7 +78,7 @@ public class Discovery extends Controller {
             Source xslt = new StreamSource(Play.application().classloader().getResourceAsStream("xslt/discovery_facet.xsl"));
             TransformerFactory transFact = TransformerFactory.newInstance();
             Transformer trans = transFact.newTransformer(xslt);
-            trans.setParameter("lang", "de");
+            trans.setParameter("lang", ctx().lang().code());
             trans.setParameter("path", "./conf/xslt/") ;
             trans.setParameter("institut.id", inst.id) ;
             trans.setParameter("handle", inst.handle) ;
@@ -180,7 +180,8 @@ public class Discovery extends Controller {
             Source xslt = new StreamSource(Play.application().classloader().getResourceAsStream("xslt/discovery_results.xsl"));
             TransformerFactory transFact =  net.sf.saxon.TransformerFactoryImpl.newInstance();
             Transformer trans = transFact.newTransformer(xslt);
-            trans.setParameter("lang", "de");
+
+            trans.setParameter("lang", ctx().lang().code());
             trans.setParameter("path", "./conf/xslt/") ;
             trans.setParameter("handle", inst.handle) ;
             trans.setParameter("institut.id", inst.id) ;

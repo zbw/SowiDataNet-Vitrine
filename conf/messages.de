@@ -9,6 +9,11 @@ xmlui.ArtifactBrowser.AdvancedSearch.type_spatial = Untersuchungsgebiet
 xmlui.ArtifactBrowser.AdvancedSearch.type_universe = Grundgesamtheit
 xmlui.ArtifactBrowser.AdvancedSearch.type_method = Erhebungsverfahren
 
+label.search = Suche
+label.fulltext = Volltext
+label.searchbutton = Suchen
+label.filter = Filter
+
 dbk_file_desc =   Beschreibung der Datei
 dc_language_iso_desc =  Sprache
 dbk_resourcetype_number_desc =  Typ der Forschungsdaten
@@ -36,7 +41,7 @@ facetoption.subject = Subject
 filter.operator.contains    =  enthält
 filter.operator.equals      =  gleich
 filter.operator.authority   =  Kennung
-filter.operator.notcontains =  enthät nicht
+filter.operator.notcontains =  enthält nicht
 filter.operator.notequals   =  nicht gleich
 filter.operator.notauthority=  keine Kennung
 

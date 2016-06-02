@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+    <translations>
+        <phrase token="xmlui.ArtifactBrowser.AdvancedSearch.type_author">Autor</phrase>
+        <phrase token="xmlui.ArtifactBrowser.AdvancedSearch.type_dateIssued">Date</phrase>
+        <phrase token="xmlui.ArtifactBrowser.AdvancedSearch.type_subject">Subject</phrase>
+        <phrase token="xmlui.ArtifactBrowser.AdvancedSearch.type_language">Language</phrase>
+        <phrase token="xmlui.ArtifactBrowser.AdvancedSearch.type_pubyear">Year of Publication</phrase>
+        <phrase token="xmlui.ArtifactBrowser.AdvancedSearch.type_institution">Institution</phrase>
+        <phrase token="xmlui.ArtifactBrowser.AdvancedSearch.type_availability">Availabitity</phrase>
+        <phrase token="xmlui.ArtifactBrowser.AdvancedSearch.type_subjectOther">Fachgebiet</phrase>
+        <phrase token="xmlui.ArtifactBrowser.AdvancedSearch.type_classification">Kategorie</phrase>
+        <phrase token="xmlui.ArtifactBrowser.AdvancedSearch.type_spatial">Untersuchungsgebiet</phrase>
+        <phrase token="xmlui.ArtifactBrowser.AdvancedSearch.type_universe">Grundgesamtheit</phrase>
+        <phrase token="xmlui.ArtifactBrowser.AdvancedSearch.type_method">Erhebungsverfahren</phrase>
+
+        <phrase token="xmlui.ArtifactBrowser.SimpleSearch.filter.author">Autor</phrase>
+        <phrase token="xmlui.ArtifactBrowser.SimpleSearch.filter.dateIssued">Date</phrase>
+        <phrase token="xmlui.ArtifactBrowser.SimpleSearch.filter.subject">Subject</phrase>
+        <phrase token="xmlui.ArtifactBrowser.SimpleSearch.filter.language">Language</phrase>
+        <phrase token="xmlui.ArtifactBrowser.SimpleSearch.filter.pubyear">Year of publication</phrase>
+        <phrase token="xmlui.ArtifactBrowser.SimpleSearch.filter.institution">Institution</phrase>
+        <phrase token="xmlui.ArtifactBrowser.SimpleSearch.filter.availability">Availability</phrase>
+        <phrase token="xmlui.ArtifactBrowser.SimpleSearch.filter.subjectOther">Fachgebiet</phrase>
+        <phrase token="xmlui.ArtifactBrowser.SimpleSearch.filter.classification">Kategorie</phrase>
+        <phrase token="xmlui.ArtifactBrowser.SimpleSearch.filter.spatial">Untersuchungsgebiet</phrase>
+        <phrase token="xmlui.ArtifactBrowser.SimpleSearch.filter.universe">Grundgesamtheit</phrase>
+        <phrase token="xmlui.ArtifactBrowser.SimpleSearch.filter.method">Erhebungsverfahren</phrase>
+
+        <phrase token="pager.back">back</phrase>
+        <phrase token="pager.forward">forward</phrase>
+        <phrase token="pager.items">documents</phrase>
+        <phrase token="pager.page">Page</phrase>
+        <phrase token="pager.of">of</phrase>
+        <phrase token="pager.pages">pages</phrase>
+        <phrase token="label.researcher">Primärforscher / Institution eng..</phrase>
+        <phrase token="label.pubyear">Publikationsjahr</phrase>
+        <phrase token="label.availability">Availability</phrase>
+
+</translations>
