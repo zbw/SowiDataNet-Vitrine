@@ -25,6 +25,7 @@
         <phrase token="xmlui.ArtifactBrowser.SimpleSearch.filter.spatial">Untersuchungsgebiet</phrase>
         <phrase token="xmlui.ArtifactBrowser.SimpleSearch.filter.universe">Grundgesamtheit</phrase>
         <phrase token="xmlui.ArtifactBrowser.SimpleSearch.filter.method">Erhebungsverfahren</phrase>
+        <phrase token="xmlui.ArtifactBrowser.AdvancedSearch.type_dbkIssuer">Herausgeber</phrase>
 
         <phrase token="pager.back">zurück</phrase>
         <phrase token="pager.forward">weiter</phrase>
