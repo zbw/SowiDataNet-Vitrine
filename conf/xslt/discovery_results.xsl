@@ -80,7 +80,24 @@
                 <div class="listitemlabel"><xsl:call-template name="translate"><xsl:with-param name="token">label.researcher</xsl:with-param></xsl:call-template></div>
                 <div class="listitemvalue">
                     <xsl:for-each select="list[ends-with(@n,'dbk.primaryresearcher')]/item">
-                        <div><xsl:value-of select="."/></div>
+                        <xsl:analyze-string select="." regex="\[(.*?)\]\((.*?)\)">
+
+                            <xsl:matching-substring>
+                                <xsl:element name="a">
+                                    <xsl:attribute name="href">
+                                        <xsl:value-of select="regex-group(2)"/>
+                                    </xsl:attribute>
+                                    <xsl:attribute name="target">_blank </xsl:attribute>
+
+                                    <xsl:value-of select="regex-group(1)"/>
+                                </xsl:element>
+
+                            </xsl:matching-substring>
+                            <xsl:non-matching-substring>
+                                <xsl:value-of select="current()"/>
+                            </xsl:non-matching-substring>
+                        </xsl:analyze-string>
+
                     </xsl:for-each>
                 </div>
                 </div>

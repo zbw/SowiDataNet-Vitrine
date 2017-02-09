@@ -61,7 +61,15 @@
                     <xsl:otherwise>
                 <a>
                 <xsl:attribute name="href">/<xsl:value-of select="$institut.id"/>/discover/<xsl:value-of select="$basehandle"/>/<xsl:value-of select="$handle"/>/<xsl:value-of select="substring-after(xref/@target,'discover')"/></xsl:attribute>
-                <xsl:value-of select="xref/."/>
+                    <xsl:analyze-string select="xref/." regex="\[(.*?)\]\((.*?)\)">
+                        <xsl:matching-substring>
+                            <xsl:value-of select="regex-group(1)"/>
+                        </xsl:matching-substring>
+                        <xsl:non-matching-substring>
+                            <xsl:value-of select="current()"/>
+                        </xsl:non-matching-substring>
+                    </xsl:analyze-string>
+
                 </a>
                     </xsl:otherwise>
                 </xsl:choose>

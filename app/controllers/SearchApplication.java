@@ -104,7 +104,12 @@ public class SearchApplication extends Controller {
                     Filter filter = new Filter();
                     filter.queryWithoutFilter = "/" + inst.id + "/discover/" + inst.basehandle + "/" + handle + "/?" + linkparams;
                     filter.typ = request().getQueryString(key);
-                    filter.filter = request().getQueryString(valuekey);
+                    //filter in this version of dspace prototyp sometimes has a link
+                    String filter_filter = request().getQueryString(valuekey);
+                    if (filter_filter.startsWith("[")) {
+                        filter_filter = filter_filter.substring(1,filter_filter.indexOf(']'));
+                    }
+                    filter.filter = filter_filter;
                     filter.relationalOperator = request().getQueryString("filter_relational_operator" + post);
                     filters.add(filter);
                 }
