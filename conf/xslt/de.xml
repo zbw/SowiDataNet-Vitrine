@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
     <translations>
-        <phrase token="xmlui.ArtifactBrowser.AdvancedSearch.type_author">Author</phrase>
-        <phrase token="xmlui.ArtifactBrowser.AdvancedSearch.type_dateIssued">Datum</phrase>
-        <phrase token="xmlui.ArtifactBrowser.AdvancedSearch.type_subject">Subjekt</phrase>
-        <phrase token="xmlui.ArtifactBrowser.AdvancedSearch.type_language">Sprache</phrase>
+        <phrase token="xmlui.ArtifactBrowser.AdvancedSearch.type_author_DE">Author</phrase>
+        <phrase token="xmlui.ArtifactBrowser.AdvancedSearch.type_dateIssued_DE">Datum</phrase>
+        <phrase token="xmlui.ArtifactBrowser.AdvancedSearch.type_subject_DE">Subjekt</phrase>
+        <phrase token="xmlui.ArtifactBrowser.AdvancedSearch.type_language_DE">Sprache</phrase>
         <phrase token="xmlui.ArtifactBrowser.AdvancedSearch.type_pubyear">Jahr der Veröffentlichung</phrase>
-        <phrase token="xmlui.ArtifactBrowser.AdvancedSearch.type_institution">Institution</phrase>
-        <phrase token="xmlui.ArtifactBrowser.AdvancedSearch.type_availability">Verfügbarkeit</phrase>
-        <phrase token="xmlui.ArtifactBrowser.AdvancedSearch.type_subjectOther">Fachgebiet</phrase>
-        <phrase token="xmlui.ArtifactBrowser.AdvancedSearch.type_classification">Kategorie</phrase>
-        <phrase token="xmlui.ArtifactBrowser.AdvancedSearch.type_spatial">Untersuchungsgebiet</phrase>
-        <phrase token="xmlui.ArtifactBrowser.AdvancedSearch.type_universe">Grundgesamtheit</phrase>
-        <phrase token="xmlui.ArtifactBrowser.AdvancedSearch.type_method">Erhebungsverfahren</phrase>
-        <phrase token="xmlui.ArtifactBrowser.AdvancedSearch.type_classification_DE111">Fachgebiet</phrase>
+        <phrase token="xmlui.ArtifactBrowser.AdvancedSearch.type_institution_DE">Institution</phrase>
+        <phrase token="xmlui.ArtifactBrowser.AdvancedSearch.type_availability_DE">Verfügbarkeit</phrase>
+        <phrase token="xmlui.ArtifactBrowser.AdvancedSearch.type_subjectOther_DE">Schlagworte</phrase>
+        <phrase token="xmlui.ArtifactBrowser.AdvancedSearch.type_classification_DE">Fachgebiet</phrase>
+        <phrase token="xmlui.ArtifactBrowser.AdvancedSearch.type_spatial_DE">Untersuchungsgebiet</phrase>
+        <phrase token="xmlui.ArtifactBrowser.AdvancedSearch.type_universe_DE">Grundgesamtheit</phrase>
+        <phrase token="xmlui.ArtifactBrowser.AdvancedSearch.type_method_DE">Erhebungsverfahren</phrase>
+        <phrase token="xmlui.ArtifactBrowser.AdvancedSearch.type_dbkIssuer_DE">Herausgeber</phrase>
 
         <phrase token="xmlui.ArtifactBrowser.SimpleSearch.filter.author">Author</phrase>
         <phrase token="xmlui.ArtifactBrowser.SimpleSearch.filter.dateIssued">Datum</phrase>
@@ -26,7 +26,7 @@
         <phrase token="xmlui.ArtifactBrowser.SimpleSearch.filter.spatial">Untersuchungsgebiet</phrase>
         <phrase token="xmlui.ArtifactBrowser.SimpleSearch.filter.universe">Grundgesamtheit</phrase>
         <phrase token="xmlui.ArtifactBrowser.SimpleSearch.filter.method">Erhebungsverfahren</phrase>
-        <phrase token="xmlui.ArtifactBrowser.AdvancedSearch.type_dbkIssuer">Herausgeber</phrase>
+
 
         <phrase token="pager.back">zurück</phrase>
         <phrase token="pager.forward">weiter</phrase>

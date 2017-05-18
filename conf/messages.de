@@ -37,6 +37,7 @@ facetoption.universe = Grundgesamtheit
 facetoption.method = Erhebungsverfahren
 facetoption.title = Title
 facetoption.subject = Subject
+facetoption.dbkIssuer = Herausgeber
 
 filter.operator.contains    =  enthält
 filter.operator.equals      =  gleich

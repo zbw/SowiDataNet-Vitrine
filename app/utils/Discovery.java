@@ -113,7 +113,9 @@ public class Discovery extends Controller {
                     NodeList options = XPath.selectNodes("option", node);
                     for ( int i =0;i<options.getLength(); i++) {
                          String value = XPath.selectText("@returnValue",options.item(i));
-                        facetlist.add(new Facet(value,"facetoption."+value));
+                         if (!(value.endsWith("_DE") || value.endsWith("_EN"))) {
+                             facetlist.add(new Facet(value, "facetoption." + value));
+                         }
                     }
                 }
                 // get the available operators
