@@ -12,6 +12,7 @@
         <phrase token="xmlui.ArtifactBrowser.AdvancedSearch.type_spatial">Untersuchungsgebiet</phrase>
         <phrase token="xmlui.ArtifactBrowser.AdvancedSearch.type_universe">Grundgesamtheit</phrase>
         <phrase token="xmlui.ArtifactBrowser.AdvancedSearch.type_method">Erhebungsverfahren</phrase>
+        <phrase token="xmlui.ArtifactBrowser.AdvancedSearch.type_classification_DE111">Fachgebiet</phrase>
 
         <phrase token="xmlui.ArtifactBrowser.SimpleSearch.filter.author">Author</phrase>
         <phrase token="xmlui.ArtifactBrowser.SimpleSearch.filter.dateIssued">Datum</phrase>
