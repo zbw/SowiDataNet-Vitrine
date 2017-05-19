@@ -5,9 +5,19 @@ It opens the view for a filtered access to the institutional data in a Corporate
 
 ##System requirements
 * Java JDK 1.8
+* a free Port
+
+## Play Framework
+This application is built on the [Play Framework](https://www.playframework.com/documentation/2.3.x/Home).
 
 ## Installation
-
+There are diffent ways installing and running the application using activator:
+* Using the [play console](https://www.playframework.com/documentation/2.3.x/PlayConsole) is for playing around
+* or in [production mode](https://www.playframework.com/documentation/2.3.x/Production)
+* Creating a standalone version using [activator dist](https://www.playframework.com/documentation/2.3.x/ProductionDist)
+or a package archive
+* You can also use the provided vitrine.sh script after configuring it at your needs. You can stop/update/start it.
+ 
 
 ## Configuration
 The application is started with the path to a configuration file. You can take the application.conf as an example.
