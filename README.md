@@ -11,12 +11,12 @@ It opens the view for a filtered access to the institutional data in a Corporate
 This application is built on the [Play Framework](https://www.playframework.com/documentation/2.3.x/Home).
 
 ## Installation
-There are diffent ways installing and running the application using activator:
-* Using the [play console](https://www.playframework.com/documentation/2.3.x/PlayConsole) is for playing around
-* or in [production mode](https://www.playframework.com/documentation/2.3.x/Production)
-* Creating a standalone version using [activator dist](https://www.playframework.com/documentation/2.3.x/ProductionDist)
-or a package archive
-* You can also use the provided vitrine.sh script after configuring it at your needs. You can stop/update/start it.
+There are diffent ways installing and running the application using activator:  
+* Using the [play console](https://www.playframework.com/documentation/2.3.x/PlayConsole) is for playing around  
+* or in [production mode](https://www.playframework.com/documentation/2.3.x/Production)  
+* Creating a standalone version using [activator dist](https://www.playframework.com/documentation/2.3.x/ProductionDist)  
+or a package archive  
+* You can also use the provided vitrine.sh script after configuring it at your needs. You can stop/update/start it.  
  
 
 ## Configuration
