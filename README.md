@@ -1,9 +1,9 @@
-#SowiDataNet Vitrine
+# SowiDataNet Vitrine
 
 The SowiDataNet (SDN) - Vitrine is an institutional frontend for the [SowiDataNet](https://sowidatanet.de/).
 It opens the view for a filtered access to the institutional data in a Corporate Design.
 
-##System requirements
+## System requirements
 * Java JDK 1.8
 * a free Port
 
